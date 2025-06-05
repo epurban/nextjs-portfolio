@@ -42,19 +42,16 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   useEffect(() => {
     if (userInteracted) return;
     let interval: NodeJS.Timeout;
-    const timeout = setTimeout(() => {
-      interval = setInterval(() => {
-        setAutoHoverIdx((prev) => {
-          let next;
-          do {
-            next = Math.floor(Math.random() * skills.length);
-          } while (next === prev && skills.length > 1);
-          return next;
-        });
-      }, 3000); // 3 seconds between each
-    }, 3000); // 3 second initial delay
+    interval = setInterval(() => {
+      setAutoHoverIdx((prev) => {
+        let next;
+        do {
+          next = Math.floor(Math.random() * skills.length);
+        } while (next === prev && skills.length > 1);
+        return next;
+      });
+    }, 3000); // 3 seconds between each
     return () => {
-      clearTimeout(timeout);
       if (interval) clearInterval(interval);
     };
   }, [skills.length, userInteracted]);
