@@ -91,19 +91,24 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   }
 
   return (
-    <div ref={containerRef} className="relative w-[400px] h-[400px] overflow-visible" style={{ width: CONTAINER_SIZE, height: CONTAINER_SIZE }}>
-      {positions.map(({ x, y, skillIdx }) => (
-        <AnimatedCircle
-          key={skillIdx}
-          baseX={x}
-          baseY={y}
-          icon={skills[skillIdx].icon}
-          mouse={mouse}
-          hovered={hoveredIdx === skillIdx}
-          setHovered={() => setHoveredIdx(skillIdx)}
-          unsetHovered={() => setHoveredIdx(null)}
-        />
-      ))}
+    <div className="flex flex-col items-center justify-center">
+      <div ref={containerRef} className="relative overflow-visible" style={{ width: CONTAINER_SIZE, height: CONTAINER_SIZE }}>
+        {positions.map(({ x, y, skillIdx }) => (
+          <AnimatedCircle
+            key={skillIdx}
+            baseX={x}
+            baseY={y}
+            icon={skills[skillIdx].icon}
+            mouse={mouse}
+            hovered={hoveredIdx === skillIdx}
+            setHovered={() => setHoveredIdx(skillIdx)}
+            // unsetHovered={() => setHoveredIdx(null)}
+          />
+        ))}
+        <div className="absolute top-5 left-1/2 -translate-x-1/2">
+          {hoveredIdx && skills[hoveredIdx] ? <p className="text-2xl font-semibold tracking-tighter">{skills[hoveredIdx].name}</p> : null}
+        </div>
+      </div>
     </div>
   );
 };

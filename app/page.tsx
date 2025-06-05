@@ -17,6 +17,7 @@ import {
   Cpu,
   GitBranch,
   Gamepad2,
+  Figma,
 } from "lucide-react";
 import Link from "next/link";
 import { SkillPool } from "./components/SkillPool";
@@ -66,6 +67,11 @@ export default function Page() {
           { name: "Unity", icon: <Gamepad2 color="black" className="h-5 w-5" /> },
           { name: "TypeScript", icon: <FileCode color="black" className="h-5 w-5" /> },
           { name: "JavaScript", icon: <FileCode color="black" className="h-5 w-5" /> },
+          // { name: "Vitest", icon: <Activity color="black" className="h-5 w-5" /> },
+          // { name: "Jest", icon: <Activity color="black" className="h-5 w-5" /> },
+          // { name: "Playwright", icon: <Terminal color="black" className="h-5 w-5" /> },
+          // { name: "Figma", icon: <Figma color="black" className="h-5 w-5" /> },
+          // { name: "Framer Motion", icon: <FileCode color="black" className="h-5 w-5" /> },
         ]}
       />
     </section>
