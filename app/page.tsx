@@ -18,6 +18,7 @@ import {
   GitBranch,
   Gamepad2,
   Figma,
+  Phone,
 } from "lucide-react";
 import Link from "next/link";
 import { SkillPool } from "./components/SkillPool";
@@ -101,6 +102,8 @@ export default function Page() {
           // { name: "Playwright", icon: <Terminal color="black" className="h-5 w-5" /> },
           // { name: "Figma", icon: <Figma color="black" className="h-5 w-5" /> },
           // { name: "Framer Motion", icon: <FileCode color="black" className="h-5 w-5" /> },
+          // { name: "React Native", icon: <Phone color="black" className="h-5 w-5" /> },
+          // { name: "Expo", icon: <Phone color="black" className="h-5 w-5" /> },
         ]}
       />
     </section>

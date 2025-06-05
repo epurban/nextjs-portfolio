@@ -35,6 +35,38 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mouse, setMouse] = useState<Vec2 | null>(null);
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [autoHoverIdx, setAutoHoverIdx] = useState<number | null>(null);
+  const [userInteracted, setUserInteracted] = useState(false);
+
+  // Auto-cycle hovered skill before user interaction
+  useEffect(() => {
+    if (userInteracted) return;
+    let interval: NodeJS.Timeout;
+    const timeout = setTimeout(() => {
+      interval = setInterval(() => {
+        setAutoHoverIdx((prev) => {
+          let next;
+          do {
+            next = Math.floor(Math.random() * skills.length);
+          } while (next === prev && skills.length > 1);
+          return next;
+        });
+      }, 3000); // 3 seconds between each
+    }, 3000); // 3 second initial delay
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
+  }, [skills.length, userInteracted]);
+
+  // Stop auto-cycling on user interaction
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const handlePointerMove = () => setUserInteracted(true);
+    const el = containerRef.current;
+    el.addEventListener("pointermove", handlePointerMove, { once: true });
+    return () => el.removeEventListener("pointermove", handlePointerMove);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -50,7 +82,6 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
       setMouse(null);
       setHoveredIdx(null);
     };
-
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseleave", handleLeave);
     return () => {
@@ -90,6 +121,18 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
     skillIdx++;
   }
 
+  // Determine which index is hovered (manual or auto)
+  const effectiveHoveredIdx = userInteracted ? hoveredIdx : autoHoverIdx;
+
+  // Simulate mouse position for auto-hovered circle
+  let simulatedMouse: Vec2 | null = mouse;
+  if (!userInteracted && effectiveHoveredIdx !== null) {
+    const hoveredPos = positions.find((p) => p.skillIdx === effectiveHoveredIdx);
+    if (hoveredPos) {
+      simulatedMouse = { x: hoveredPos.x, y: hoveredPos.y };
+    }
+  }
+
   return (
     <div className="flex flex-col items-center justify-center">
       <div ref={containerRef} className="relative overflow-visible" style={{ width: CONTAINER_SIZE, height: CONTAINER_SIZE }}>
@@ -99,14 +142,18 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
             baseX={x}
             baseY={y}
             icon={skills[skillIdx].icon}
-            mouse={mouse}
-            hovered={hoveredIdx === skillIdx}
+            mouse={effectiveHoveredIdx === skillIdx ? simulatedMouse : mouse}
+            hovered={effectiveHoveredIdx === skillIdx}
             setHovered={() => setHoveredIdx(skillIdx)}
             // unsetHovered={() => setHoveredIdx(null)}
           />
         ))}
         <div className="absolute top-5 left-1/2 -translate-x-1/2">
-          {hoveredIdx && skills[hoveredIdx] ? <p className="text-2xl font-semibold tracking-tighter">{skills[hoveredIdx].name}</p> : null}
+          {effectiveHoveredIdx !== null && skills[effectiveHoveredIdx] ? (
+            <p className="text-2xl font-semibold tracking-tighter">{skills[effectiveHoveredIdx].name}</p>
+          ) : (
+            <p className="text-2xl font-semibold tracking-tighter">Skills</p>
+          )}
         </div>
       </div>
     </div>

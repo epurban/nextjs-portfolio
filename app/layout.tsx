@@ -11,15 +11,15 @@ import { ThemeProvider } from "./components/ThemeProvider";
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: `Edward Urban's Portfolio`,
-    template: `%s | Edward Urban's Portfolio`,
+    default: `Edward Urban`,
+    template: `%s | Edward Urban`,
   },
   description: "Senior software engineer passionate about creating high quality user experiences and performant applications.",
   openGraph: {
-    title: "Edward Urban's Portfolio",
+    title: "Edward Urban",
     description: "Senior software engineer passionate about creating high quality user experiences and performant applications.",
     url: baseUrl,
-    siteName: "Edward Urban's Portfolio",
+    siteName: "Edward Urban",
     locale: "en_US",
     type: "website",
   },
