@@ -128,7 +128,7 @@ function AnimatedCircle({
   mouse: Vec2 | null;
   hovered: boolean;
   setHovered: () => void;
-  unsetHovered: () => void;
+  unsetHovered?: () => void;
 }) {
   const x = useSpring(baseX, { stiffness: 300, damping: 30 });
   const y = useSpring(baseY, { stiffness: 300, damping: 30 });
@@ -182,7 +182,7 @@ function AnimatedCircle({
         zIndex: hovered ? 10 : 1,
       }}
       onMouseEnter={setHovered}
-      onMouseLeave={unsetHovered}
+      onMouseLeave={() => unsetHovered?.()}
     >
       {icon}
     </motion.div>

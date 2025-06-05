@@ -21,29 +21,58 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { SkillPool } from "./components/SkillPool";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./components/ui/tooltip";
+import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 
 export default function Page() {
   return (
-    <section className="flex flex-1 flex-row justify-center items-center gap-10">
+    <section className="flex flex-1 flex-col md:flex-row justify-center items-center gap-10">
       <div className="flex flex-1 flex-col justify-center max-w-xl">
-        <h1 className="mb-8 text-6xl font-semibold tracking-tighter">Edward Urban,</h1>
+        <div className="flex flex-row items-center gap-4 mb-8">
+          <Avatar className="w-15 h-15">
+            <AvatarImage src="https://avatars.githubusercontent.com/u/22136514?v=4" alt="Edward Urban Avatar" />
+            <AvatarFallback>EU</AvatarFallback>
+          </Avatar>
+          <h1 className="text-6xl font-semibold tracking-tighter">Edward Urban,</h1>
+        </div>
         <p className="mb-4">{`senior software engineer passionate about creating high quality user experiences and performant applications.`}</p>
         <div className="flex items-center gap-2">
-          <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
-            <Link href="https://github.com/epurban" target="_blank">
-              <Github className="h-5 w-5" />
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
-            <Link href="https://www.linkedin.com/in/epurban" target="_blank">
-              <Linkedin className="h-5 w-5" />
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
-            <Link href="mailto:edurbancodes@gmail.com">
-              <Mail className="h-5 w-5" />
-            </Link>
-          </Button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
+                <Link href="https://github.com/epurban" target="_blank">
+                  <Github className="h-5 w-5" />
+                </Link>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Check out my public projects</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
+                <Link href="https://www.linkedin.com/in/epurban" target="_blank">
+                  <Linkedin className="h-5 w-5" />
+                </Link>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Connect with me on LinkedIn</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
+                <Link href="mailto:edurbancodes@gmail.com">
+                  <Mail className="h-5 w-5" />
+                </Link>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>Shoot over an email</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
       </div>
       <SkillPool
