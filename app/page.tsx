@@ -18,6 +18,7 @@ import {
   GitBranch,
   Gamepad2,
 } from "lucide-react";
+import Link from "next/link";
 import { SkillPool } from "./components/SkillPool";
 
 export default function Page() {
@@ -27,14 +28,20 @@ export default function Page() {
         <h1 className="mb-8 text-6xl font-semibold tracking-tighter">Edward Urban,</h1>
         <p className="mb-4">{`senior software engineer passionate about creating high quality user experiences and performant applications.`}</p>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
-            <Github className="h-5 w-5" />
+          <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
+            <Link href="https://github.com/epurban" target="_blank">
+              <Github className="h-5 w-5" />
+            </Link>
           </Button>
-          <Button variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
-            <Linkedin className="h-5 w-5" />
+          <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
+            <Link href="https://www.linkedin.com/in/epurban" target="_blank">
+              <Linkedin className="h-5 w-5" />
+            </Link>
           </Button>
-          <Button variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
-            <Mail className="h-5 w-5" />
+          <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
+            <Link href="mailto:edurbancodes@gmail.com">
+              <Mail className="h-5 w-5" />
+            </Link>
           </Button>
         </div>
       </div>
