@@ -28,16 +28,15 @@ export default function Page() {
   return (
     <section
       style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 1fr)",
-        gap: "24px",
+        columnCount: 2,
+        columnGap: "24px",
         width: "60vw",
         marginTop: "15%",
         maxWidth: "1400px",
         marginBottom: "15%",
       }}
     >
-      <Card className="h-[600px] flex flex-col justify-between">
+      <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
           <div className="flex flex-row gap-8">
             <div style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}>
@@ -64,7 +63,7 @@ export default function Page() {
           <Image src="/Marketplace2.jpg" layout="responsive" width={200} height={200} alt="Marketplace Screenshot" style={{ borderRadius: "8px" }} />
         </CardContent>
       </Card>
-      <Card className="h-[600px] flex flex-col justify-between">
+      <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
           <div className="flex flex-row gap-8">
             <div style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}>
@@ -91,7 +90,7 @@ export default function Page() {
           <Image src="/picksix1.jpg" layout="responsive" alt="Pick6 Screenshot" width={200} height={200} style={{ borderRadius: "8px" }} />
         </CardContent>
       </Card>
-      <Card className="h-[150px] flex-col justify-between">
+      <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
           <div className="flex flex-row gap-8">
             <Image src="/youarehere.png" width={60} height={60} alt="You are here icon" style={{ objectFit: "contain" }} />
@@ -110,7 +109,7 @@ export default function Page() {
           </CardAction>
         </CardHeader>
       </Card>
-      <Card className="h-[200px] flex-col justify-between">
+      <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
           <div className="flex flex-row gap-8">
             <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
@@ -133,7 +132,7 @@ export default function Page() {
           </CardAction>
         </CardHeader>
       </Card>
-      <Card className="h-[550px] flex-col justify-between">
+      <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
           <div className="flex flex-row gap-4">
             <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
@@ -160,7 +159,7 @@ export default function Page() {
           <Image src="/ninonline.png" layout="responsive" width={200} height={200} alt="Nin Online Screenshot" style={{ borderRadius: "8px" }} />
         </CardContent>
       </Card>
-      <Card className="h-[400px] flex-col justify-between">
+      <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
           <div className="flex flex-row gap-8">
             <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
@@ -179,7 +178,7 @@ export default function Page() {
           </div>
         </CardHeader>
       </Card>
-      <Card className="h-[200px]">
+      <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
           <div className="flex flex-row gap-8">
             <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
@@ -196,7 +195,7 @@ export default function Page() {
           </div>
         </CardHeader>
       </Card>
-      <Card className="h-[300px]flex-col justify-between">
+      <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
           <div className="flex flex-row gap-8">
             <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
