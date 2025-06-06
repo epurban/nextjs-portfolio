@@ -26,17 +26,8 @@ import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle }
 
 export default function Page() {
   return (
-    <section
-      style={{
-        columnCount: 2,
-        columnGap: "24px",
-        width: "60vw",
-        marginTop: "15%",
-        maxWidth: "1400px",
-        marginBottom: "15%",
-      }}
-    >
-      <Card className="break-inside-avoid mb-6 flex flex-col">
+    <section className="columns-1 md:columns-2 gap-6 w-[90vw] lg:w-[60vw] mt-[15%] mb-[15%] max-w-[1400px]">
+      <Card className="break-inside-avoid mb-6">
         <CardHeader>
           <div className="flex flex-row gap-8">
             <div style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}>
