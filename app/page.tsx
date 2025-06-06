@@ -81,7 +81,7 @@ export default function Page() {
               </Button>
             </TooltipTrigger>
             <TooltipContent side="bottom">
-              <p>Shoot over an email</p>
+              <p>Shoot me an email</p>
             </TooltipContent>
           </Tooltip>
         </div>

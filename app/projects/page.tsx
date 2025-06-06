@@ -39,12 +39,19 @@ export default function Page() {
     >
       <Card className="h-[600px] flex flex-col justify-between">
         <CardHeader>
-          <CardTitle>DraftKings Marketplace</CardTitle>
-          <CardDescription>
-            An NFT marketplace which allowed users to purchase digital memorabilia and player cards to be used in our gamified NFT experience, known as
-            Reignmakers. Notable features that I tech planned and delivered include the Bulk Listings Manager, Inline Card Actions, a Revamped Virtualized Grid,
-            Time Extension Auctions, a Revamped Pack Reveal Experience, and Dark Mode.
-          </CardDescription>
+          <div className="flex flex-row gap-8">
+            <div style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}>
+              <Image src="/draftkings.webp" width={50} height={50} alt="DraftKings logo" style={{ objectFit: "contain" }} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <CardTitle>DraftKings Marketplace</CardTitle>
+              <CardDescription>
+                An NFT marketplace which allowed users to purchase digital memorabilia and player cards to be used in our gamified NFT experience, known as
+                Reignmakers. Notable features that I tech planned and delivered include the Bulk Listings Manager, Inline Card Actions, a Revamped Virtualized
+                Grid, Time Extension Auctions, a Revamped Pack Reveal Experience, and Dark Mode.
+              </CardDescription>
+            </div>
+          </div>
           <CardAction>
             <Button asChild variant="link">
               <Link href="https://youtu.be/ElzyGrCVjwc?list=PLCJVf8kosMyJwU24CDArrdwTDPxbgIyyh&t=66" target="_blank">
@@ -57,14 +64,21 @@ export default function Page() {
           <Image src="/Marketplace2.jpg" layout="responsive" width={200} height={200} alt="Marketplace Screenshot" style={{ borderRadius: "8px" }} />
         </CardContent>
       </Card>
-      <Card className="h-[500px] flex flex-col justify-between">
+      <Card className="h-[600px] flex flex-col justify-between">
         <CardHeader>
-          <CardTitle>DraftKings Pick6</CardTitle>
-          <CardDescription>
-            My current endeavor at DraftKings, Pick6 is a cutting edge peer to peer fantasy game available for major sports and some esports. Notable features
-            I've tech planned and delivered include a Tokenized Rewards System, Player Pools Statuses, and a Jackpot Promotion Experience. Frameworks, libraries
-            and tools I use on a daily basis include React 18, Remix v2, Emotion, Express, Vitest, Playwright, Storybook.
-          </CardDescription>
+          <div className="flex flex-row gap-8">
+            <div style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}>
+              <Image src="/pick6.png" width={50} height={50} alt="DraftKings logo" style={{ objectFit: "contain" }} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <CardTitle>DraftKings Pick6</CardTitle>
+              <CardDescription>
+                My current endeavor at DraftKings, Pick6 is a cutting edge peer to peer fantasy game available for major sports and some esports. Notable
+                features I've tech planned and delivered include a Tokenized Rewards System, Player Pools Statuses, and a Jackpot Promotion Experience.
+                Frameworks, libraries and tools I use on a daily basis include React 18, Remix v2, Emotion, Express, Vitest, Playwright, Storybook.
+              </CardDescription>
+            </div>
+          </div>
           <CardAction>
             <Button asChild variant="link">
               <Link href="https://pick6.draftkings.com" target="_blank">
@@ -99,8 +113,8 @@ export default function Page() {
       <Card className="h-[200px] flex-col justify-between">
         <CardHeader>
           <div className="flex flex-row gap-8">
-            <div style={{ flex: 1, minWidth: "80px", width: "80px", height: "80px" }}>
-              <Image src="/Edparty.png" width={80} height={80} alt="EdParty logo" style={{ borderRadius: "8px", objectFit: "contain" }} />
+            <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
+              <Image src="/Edparty.png" width={60} height={60} alt="EdParty logo" style={{ borderRadius: "8px", objectFit: "contain" }} />
             </div>
             <div className="flex flex-col gap-1.5">
               <CardTitle>EdParty</CardTitle>
@@ -119,14 +133,21 @@ export default function Page() {
           </CardAction>
         </CardHeader>
       </Card>
-      <Card className="h-[500px] flex-col justify-between">
+      <Card className="h-[550px] flex-col justify-between">
         <CardHeader>
-          <CardTitle>Nin Online</CardTitle>
-          <CardDescription>
-            Before I went to University of Michigan for Computer Science, I self taught myself how to code in VB6, learned client-server game networking
-            architecture, partnered with an artist, and used an existing open source game engine to create Nin Online, a 2D online multiplayer role playing game
-            for Windows.
-          </CardDescription>
+          <div className="flex flex-row gap-4">
+            <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
+              <Image src="/ninonlinelogo.png" width={60} height={60} alt="General Electric meatball" style={{ objectFit: "contain" }} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <CardTitle>Nin Online</CardTitle>
+              <CardDescription>
+                Before I went to University of Michigan for Computer Science, I self taught myself how to code in VB6, learned client-server game networking
+                architecture, partnered with an artist, and used an existing open source game engine to create Nin Online, a 2D online multiplayer role playing
+                game for Windows.
+              </CardDescription>
+            </div>
+          </div>
           <CardAction>
             <Button asChild variant="link">
               <Link href="https://ninonline.com" target="_blank">
@@ -139,25 +160,59 @@ export default function Page() {
           <Image src="/ninonline.png" layout="responsive" width={200} height={200} alt="Nin Online Screenshot" style={{ borderRadius: "8px" }} />
         </CardContent>
       </Card>
-      <Card className="h-[400px]">
+      <Card className="h-[400px] flex-col justify-between">
         <CardHeader>
-          <CardTitle>GE Cloud Service Center</CardTitle>
-          <CardDescription>
-            The Cloud Service Center is a full-stack web application I created with TypeScript React and Golang to enable cloud gatekeepers across various GE
-            business units to manage their catalog of 800+ AWS and Azure cloud environments. The backend service communicates with our interal Cloud team's API
-            for a master list of AWS accounts, and uses RBAC roles to determine account ownership for management. From there it uses AWS and Azure APIs and is
-            granted federated access into individual accounts to perform actions such as decommissioning environments, spinning up new resources, tagging
-            assets, and managing service control policies.
-          </CardDescription>
+          <div className="flex flex-row gap-8">
+            <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
+              <Image src="/GE.png" width={60} height={60} alt="General Electric meatball" style={{ objectFit: "contain" }} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <CardTitle>GE Cloud Service Center</CardTitle>
+              <CardDescription>
+                The Cloud Service Center is an internal full-stack web application I created with TypeScript React and Golang to enable cloud gatekeepers across
+                various GE business units to manage their catalog of 800+ AWS and Azure cloud environments. The backend service communicates with our interal
+                Cloud team's API for a master list of AWS accounts, and uses RBAC roles to determine account ownership for management. From there it uses AWS
+                and Azure APIs and is granted federated access into individual accounts to perform actions such as decommissioning environments, spinning up new
+                resources, tagging assets, and managing service control policies.
+              </CardDescription>
+            </div>
+          </div>
         </CardHeader>
       </Card>
       <Card className="h-[200px]">
         <CardHeader>
-          <CardTitle>Lumos Component Library</CardTitle>
-          <CardDescription>
-            Lumos is GE's in-house component library built to be used across business units for internal and public facing web applications. Created to be used
-            for React applications, I audited existing components to fix bugs and accessibility issues, as well as created new components such as the Stepper.
-          </CardDescription>
+          <div className="flex flex-row gap-8">
+            <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
+              <Image src="/GE.png" width={60} height={60} alt="General Electric meatball" style={{ objectFit: "contain" }} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <CardTitle>Lumos Component Library</CardTitle>
+              <CardDescription>
+                Lumos is GE's in-house component library built to be used across business units for internal and public facing web applications. Created to be
+                used for React applications, I audited existing components to fix bugs and accessibility issues, as well as created new components such as the
+                Stepper.
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+      </Card>
+      <Card className="h-[300px]flex-col justify-between">
+        <CardHeader>
+          <div className="flex flex-row gap-8">
+            <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
+              <Image src="/GE.png" width={60} height={60} alt="General Electric meatball" style={{ objectFit: "contain" }} />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <CardTitle>AWS Data Exfiltration Prevention</CardTitle>
+              <CardDescription>
+                During my time at GE's Cyber center in Richmond, I led development and testing of a serverless flow to prevent data exfiltration of AMI images
+                in our AWS cloud accounts. A potential attack vector for a large company which at the time AWS did not provide any native means of whitelist
+                accounts, users with access could send AMI images to external AWS accounts within the AWS console. This flow was serverless and used CloudWatch,
+                Step Functions, Lambda Functions, and DynamoDB. The Lambda functions were written in Python, and I created terraform templates to deploy this
+                bot across all 100+ GE Corporate cloud accounts.
+              </CardDescription>
+            </div>
+          </div>
         </CardHeader>
       </Card>
     </section>
