@@ -26,12 +26,62 @@ import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle }
 
 export default function Page() {
   return (
-    // <section className="flex flex-wrap flex-1 flex-row justify-center items-start gap-10 w-[60vw] mt-24">
-    <section style={{ display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", alignItems: "flex-start", width: "60vw", marginTop: "15%" }}>
-      <Card className="flex-1 min-w-[400px] min-h-[200px]">
+    <section
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(2, 1fr)",
+        gap: "24px",
+        width: "60vw",
+        marginTop: "15%",
+        maxWidth: "1400px",
+        marginBottom: "15%",
+      }}
+    >
+      <Card className="h-[600px] flex flex-col justify-between">
+        <CardHeader>
+          <CardTitle>DraftKings Marketplace</CardTitle>
+          <CardDescription>
+            An NFT marketplace which allowed users to purchase digital memorabilia and player cards to be used in our gamified NFT experience, known as
+            Reignmakers. Notable features that I tech planned and delivered include the Bulk Listings Manager, Inline Card Actions, a Revamped Virtualized Grid,
+            Time Extension Auctions, a Revamped Pack Reveal Experience, and Dark Mode.
+          </CardDescription>
+          <CardAction>
+            <Button asChild variant="link">
+              <Link href="https://youtu.be/ElzyGrCVjwc?list=PLCJVf8kosMyJwU24CDArrdwTDPxbgIyyh&t=66" target="_blank">
+                View Video
+              </Link>
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <Image src="/Marketplace2.jpg" layout="responsive" width={200} height={200} alt="Marketplace Screenshot" style={{ borderRadius: "8px" }} />
+        </CardContent>
+      </Card>
+      <Card className="h-[500px] flex flex-col justify-between">
+        <CardHeader>
+          <CardTitle>DraftKings Pick6</CardTitle>
+          <CardDescription>
+            My current endeavor at DraftKings, Pick6 is a cutting edge peer to peer fantasy game available for major sports and some esports. Notable features
+            I've tech planned and delivered include a Tokenized Rewards System, Player Pools Statuses, and a Jackpot Promotion Experience. Frameworks, libraries
+            and tools I use on a daily basis include React 18, Remix v2, Emotion, Express, Vitest, Playwright, Storybook.
+          </CardDescription>
+          <CardAction>
+            <Button asChild variant="link">
+              <Link href="https://pick6.draftkings.com" target="_blank">
+                View Site
+              </Link>
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <Image src="/picksix1.jpg" layout="responsive" alt="Pick6 Screenshot" width={200} height={200} style={{ borderRadius: "8px" }} />
+        </CardContent>
+      </Card>
+      <Card className="h-[150px] flex-col justify-between">
         <CardHeader>
           <div className="flex flex-row gap-8">
-            <Image src="/youarehere.png" width={60} height={60} alt="You are here icon" style={{ borderRadius: "8px" }} />
+            <Image src="/youarehere.png" width={60} height={60} alt="You are here icon" style={{ objectFit: "contain" }} />
+
             <div className="flex flex-col gap-1.5">
               <CardTitle>edwardurban.com</CardTitle>
               <CardDescription>An updated personal portfolio website created using React with Nextjs 15, Tailwind, and Shadcn.</CardDescription>
@@ -46,10 +96,12 @@ export default function Page() {
           </CardAction>
         </CardHeader>
       </Card>
-      <Card className="flex-1 min-w-[400px] min-h-[200px]">
+      <Card className="h-[200px] flex-col justify-between">
         <CardHeader>
           <div className="flex flex-row gap-8">
-            <Image src="/Edparty.png" width={40} height={40} alt="EdParty logo" style={{ borderRadius: "8px", minWidth: "40px", height: "40xp" }} />
+            <div style={{ flex: 1, minWidth: "80px", width: "80px", height: "80px" }}>
+              <Image src="/Edparty.png" width={80} height={80} alt="EdParty logo" style={{ borderRadius: "8px", objectFit: "contain" }} />
+            </div>
             <div className="flex flex-col gap-1.5">
               <CardTitle>EdParty</CardTitle>
               <CardDescription>
@@ -67,41 +119,45 @@ export default function Page() {
           </CardAction>
         </CardHeader>
       </Card>
-      <Card className="flex-1 min-w-[400px] min-h-[200px]">
+      <Card className="h-[500px] flex-col justify-between">
         <CardHeader>
-          <CardTitle>DraftKings Marketplace</CardTitle>
+          <CardTitle>Nin Online</CardTitle>
           <CardDescription>
-            An NFT marketplace which allowed users to purchase digital memorabilia and player cards to be used in our gamified NFT experience, known as
-            Reignmakers. Notable features that I tech planned and delivered include the Bulk Listings Manager, Inline Card Actions, a Revamped Virtualized Grid,
-            Time Extension Auctions, a Revamped Pack Reveal Experience, and Dark Mode.
+            Before I went to University of Michigan for Computer Science, I self taught myself how to code in VB6, learned client-server game networking
+            architecture, partnered with an artist, and used an existing open source game engine to create Nin Online, a 2D online multiplayer role playing game
+            for Windows.
           </CardDescription>
           <CardAction>
             <Button asChild variant="link">
-              <Link href="https://youtu.be/ElzyGrCVjwc?list=PLCJVf8kosMyJwU24CDArrdwTDPxbgIyyh&t=66" target="_blank">
-                View Video
+              <Link href="https://ninonline.com" target="_blank">
+                View Site
               </Link>
             </Button>
           </CardAction>
         </CardHeader>
         <CardContent>
-          <Image src="/Marketplace2.jpg" width={500} height={500} alt="Picture of the author" style={{ borderRadius: "8px" }} />
+          <Image src="/ninonline.png" layout="responsive" width={200} height={200} alt="Nin Online Screenshot" style={{ borderRadius: "8px" }} />
         </CardContent>
       </Card>
-      <Card className="flex-1 min-w-[400px] min-h-[200px]">
+      <Card className="h-[400px]">
         <CardHeader>
-          <CardTitle>Pick6</CardTitle>
+          <CardTitle>GE Cloud Service Center</CardTitle>
           <CardDescription>
-            My current endeavor at DraftKings, Pick6 is a cutting edge peer to peer fantasy game available for major sports and some esports. Notable features
-            I've tech planned and delivered include a Tokenized Rewards System, Player Pools Statuses, and a Jackpot Promotion Experience. Frameworks, libraries
-            and tools I use on a daily basis include React 18, Remix v2, Emotion, Express, Vitest, Playwright, Storybook.
+            The Cloud Service Center is a full-stack web application I created with TypeScript React and Golang to enable cloud gatekeepers across various GE
+            business units to manage their catalog of 800+ AWS and Azure cloud environments. The backend service communicates with our interal Cloud team's API
+            for a master list of AWS accounts, and uses RBAC roles to determine account ownership for management. From there it uses AWS and Azure APIs and is
+            granted federated access into individual accounts to perform actions such as decommissioning environments, spinning up new resources, tagging
+            assets, and managing service control policies.
           </CardDescription>
-          <CardAction>
-            <Button asChild variant="link">
-              <Link href="https://pick6.draftkings.com" target="_blank">
-                Open App
-              </Link>
-            </Button>
-          </CardAction>
+        </CardHeader>
+      </Card>
+      <Card className="h-[200px]">
+        <CardHeader>
+          <CardTitle>Lumos Component Library</CardTitle>
+          <CardDescription>
+            Lumos is GE's in-house component library built to be used across business units for internal and public facing web applications. Created to be used
+            for React applications, I audited existing components to fix bugs and accessibility issues, as well as created new components such as the Stepper.
+          </CardDescription>
         </CardHeader>
       </Card>
     </section>

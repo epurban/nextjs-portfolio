@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Web App Manifest */}
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <body className="antialiased lg:mx-auto min-h-screen overflow-hidden flex flex-col items-center">
+      <body className="antialiased lg:mx-auto min-h-screen flex flex-col items-center">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <main className="flex-1 min-w-0 flex flex-col px-2 md:px-0">
             <Navbar />
