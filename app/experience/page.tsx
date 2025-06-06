@@ -31,7 +31,7 @@ export default function Page() {
         <CardHeader>
           <div className="flex flex-row gap-8">
             <div style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}>
-              <Image src="/pick6.png" width={50} height={50} alt="DraftKings logo" style={{ objectFit: "contain" }} />
+              <Image src="/pick6.png" width={50} height={50} alt="Pick6 logo" style={{ objectFit: "contain" }} />
             </div>
             <div className="flex flex-col gap-1.5">
               <CardTitle>DraftKings Pick6</CardTitle>
@@ -45,7 +45,7 @@ export default function Page() {
           <CardAction>
             <Button asChild variant="link">
               <Link href="https://pick6.draftkings.com" target="_blank">
-                View Site
+                Visit Site
               </Link>
             </Button>
           </CardAction>
@@ -76,8 +76,9 @@ export default function Page() {
       <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
           <div className="flex flex-row gap-8">
-            <Image src="/youarehere.png" width={60} height={60} alt="You are here icon" style={{ objectFit: "contain" }} />
-
+            <div style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}>
+              <Image src="/youarehere.png" width={50} height={50} alt="You are here icon" style={{ objectFit: "contain" }} />
+            </div>
             <div className="flex flex-col gap-1.5">
               <CardTitle>edwardurban.com</CardTitle>
               <CardDescription>An updated personal portfolio website created using React with Nextjs 15, Tailwind, and Shadcn.</CardDescription>
@@ -129,7 +130,7 @@ export default function Page() {
           <CardAction>
             <Button asChild variant="link">
               <Link href="https://youtu.be/ElzyGrCVjwc?list=PLCJVf8kosMyJwU24CDArrdwTDPxbgIyyh&t=66" target="_blank">
-                View Video
+                Watch Video
               </Link>
             </Button>
           </CardAction>
@@ -180,9 +181,9 @@ export default function Page() {
       </Card>
       <Card className="break-inside-avoid mb-6 flex flex-col">
         <CardHeader>
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-8">
             <div style={{ flex: 1, minWidth: "60px", width: "60px", height: "60px" }}>
-              <Image src="/ninonlinelogo.png" width={60} height={60} alt="General Electric meatball" style={{ objectFit: "contain" }} />
+              <Image src="/ninonlinelogo.png" width={60} height={60} alt="Nin Online Logo" style={{ objectFit: "contain" }} />
             </div>
             <div className="flex flex-col gap-1.5">
               <CardTitle>Nin Online</CardTitle>
@@ -196,7 +197,7 @@ export default function Page() {
           <CardAction>
             <Button asChild variant="link">
               <Link href="https://ninonline.com" target="_blank">
-                View Site
+                Visit Site
               </Link>
             </Button>
           </CardAction>
