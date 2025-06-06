@@ -117,7 +117,7 @@ export default function Page() {
               <Image src="/Edparty.png" width={60} height={60} alt="EdParty logo" style={{ borderRadius: "8px", objectFit: "contain" }} />
             </div>
             <div className="flex flex-col gap-1.5">
-              <CardTitle>EdParty</CardTitle>
+              <CardTitle>Edparty</CardTitle>
               <CardDescription>
                 A fun iOS application for video chatting with your friends. Created using React Native, WebRTC and Expo, and features a signaling server used
                 for facilitating connections written in Node.js
