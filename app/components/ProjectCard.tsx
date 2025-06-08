@@ -31,7 +31,7 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
                 rest: { opacity: 0.8, y: 0, scale: 1 },
                 hovered: { opacity: 1, y: 5, scale: 1.2 },
               }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
               style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}
             >
               <Image src={logo.url} width={50} height={50} alt={logo.alt} style={{ objectFit: "contain" }} />
