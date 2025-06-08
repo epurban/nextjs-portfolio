@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Github, Linkedin, Mail, ChartPie, Phone, Cable, Gamepad2 } from "lucide-react";
 import {
   RemixDark,
@@ -31,19 +31,16 @@ import {
   Supabase,
 } from "developer-icons";
 import Link from "next/link";
+import Image from "next/image";
 import { SkillPool } from "./components/SkillPool";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./components/ui/tooltip";
-import { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./components/ui/Tooltip";
 
 export default function Page() {
   return (
     <section className="flex flex-1 flex-col md:flex-row justify-center items-center gap-10">
       <div className="flex flex-1 flex-col justify-center max-w-xl">
         <div className="flex flex-row items-center gap-4 mb-8">
-          <Avatar className="w-15 h-15">
-            <AvatarImage src="/avatar.jpeg" alt="Edward Urban Avatar" />
-            <AvatarFallback>EU</AvatarFallback>
-          </Avatar>
+          <Image src="/avatar.jpeg" width={60} height={60} alt="Edward Urban Avatar" style={{ borderRadius: "50%" }} />
           <h1 className="text-6xl font-semibold tracking-tighter">Edward Urban,</h1>
         </div>
         <p className="mb-4">{`senior software engineer passionate about creating high quality user experiences and performant applications.`}</p>
