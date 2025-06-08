@@ -1,8 +1,10 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import Image from "next/image";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ProjectCard } from "@/components/ProjectCard";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Experience",
+  description: "A showcase of Edward Urban's professional experience and personal projects.",
+};
 
 const projects = [
   {
@@ -23,7 +25,7 @@ const projects = [
   },
   {
     title: "edwardurban.com",
-    description: "An updated personal portfolio website created using React with Nextjs 15, Tailwind, and Shadcn.",
+    description: "An updated personal portfolio website created using React with Next.js 15, Tailwind, and Shadcn.",
     logo: { url: "/youarehere.png", alt: "You are here icon" },
     images: [],
     linkText: "View Source",
