@@ -41,7 +41,7 @@ export default function Page() {
       <div className="flex flex-1 flex-col justify-center max-w-xl">
         <div className="flex flex-row items-center gap-4 mb-8">
           <Avatar className="w-15 h-15">
-            <AvatarImage src="https://avatars.githubusercontent.com/u/22136514?v=4" alt="Edward Urban Avatar" />
+            <AvatarImage src="/avatar.jpeg" alt="Edward Urban Avatar" />
             <AvatarFallback>EU</AvatarFallback>
           </Avatar>
           <h1 className="text-6xl font-semibold tracking-tighter">Edward Urban,</h1>
