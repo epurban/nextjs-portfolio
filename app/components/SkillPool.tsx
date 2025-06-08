@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useSpring, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 const BASE_RADIUS = 20;
@@ -14,6 +14,15 @@ function hexToPixel(q: number, r: number, centerX: number, centerY: number) {
   const x = HEX_SPACING * (Math.sqrt(3) * q + (Math.sqrt(3) / 2) * r);
   const y = HEX_SPACING * (3 / 2) * r;
   return { x: centerX + x, y: centerY + y };
+}
+
+function shuffleArray<T>(array: T[]): T[] {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
 }
 
 type Vec2 = { x: number; y: number };
@@ -37,19 +46,21 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [autoHoverIdx, setAutoHoverIdx] = useState<number | null>(null);
   const [userInteracted, setUserInteracted] = useState(false);
+  const remainingSkillsRef = useRef<number[]>(shuffleArray(Array.from({ length: skills.length }, (_, i) => i)));
 
   // Auto-cycle hovered skill before user interaction
   useEffect(() => {
     if (userInteracted) return;
     let interval: NodeJS.Timeout;
     interval = setInterval(() => {
-      setAutoHoverIdx((prev) => {
-        let next;
-        do {
-          next = Math.floor(Math.random() * skills.length);
-        } while (next === prev && skills.length > 1);
-        return next;
-      });
+      // If we've shown all skills, reset the queue with a new random order
+      if (remainingSkillsRef.current.length === 0) {
+        remainingSkillsRef.current = shuffleArray(Array.from({ length: skills.length }, (_, i) => i));
+      }
+
+      const nextIdx = remainingSkillsRef.current[0];
+      setAutoHoverIdx(nextIdx);
+      remainingSkillsRef.current = remainingSkillsRef.current.slice(1);
     }, 3000); // 3 seconds between each
     return () => {
       if (interval) clearInterval(interval);
@@ -130,6 +141,14 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
     }
   }
 
+  const skillText = effectiveHoveredIdx !== null ? skills[effectiveHoveredIdx].name : "Skills";
+
+  const variants: Variants = {
+    initial: { opacity: 0, scale: 0 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 1, x: -25 },
+  };
+
   return (
     <div className="flex flex-col items-center justify-center">
       <div ref={containerRef} className="relative overflow-visible" style={{ width: CONTAINER_SIZE, height: CONTAINER_SIZE }}>
@@ -145,13 +164,13 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
             // unsetHovered={() => setHoveredIdx(null)}
           />
         ))}
-        <div className="absolute top-5 left-1/2 -translate-x-1/2">
-          {effectiveHoveredIdx !== null && skills[effectiveHoveredIdx] ? (
-            <p className="text-2xl font-semibold tracking-tighter">{skills[effectiveHoveredIdx].name}</p>
-          ) : (
-            <p className="text-2xl font-semibold tracking-tighter">Skills</p>
-          )}
-        </div>
+        <AnimatePresence>
+          <div className="absolute top-5 left-1/2 -translate-x-1/2">
+            <motion.p variants={variants} initial="initial" animate="animate" exit="exit" key={skillText} className="text-2xl font-semibold tracking-tighter">
+              {skillText}
+            </motion.p>
+          </div>
+        </AnimatePresence>
       </div>
     </div>
   );
