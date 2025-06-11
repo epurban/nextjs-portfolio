@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 export interface Img {
   url: string;
   alt: string;
+  style?: React.CSSProperties;
 }
 
 interface ProjectCardProps {
@@ -34,7 +35,7 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
               transition={{ duration: 0.2, ease: "easeInOut" }}
               style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}
             >
-              <Image src={logo.url} width={50} height={50} alt={logo.alt} style={{ objectFit: "contain" }} />
+              <Image src={logo.url} width={50} height={50} alt={logo.alt} style={{ objectFit: "contain", ...logo.style }} />
             </motion.div>
             <div className="flex flex-col gap-1.5">
               <CardTitle>{title}</CardTitle>

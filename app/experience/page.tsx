@@ -51,7 +51,7 @@ const projects = [
     title: "Edparty",
     description:
       "A fun iOS application for video chatting with your friends. Created using React Native, WebRTC and Expo, and features a signaling server used for facilitating connections written in Node.js",
-    logo: { url: "/Edparty.png", alt: "EdParty logo" },
+    logo: { url: "/Edparty.png", alt: "EdParty logo", style: { borderRadius: "12px" } },
     images: [],
     linkText: "View Source",
     linkUrl: "https://github.com/epurban/EdParty",
@@ -76,7 +76,7 @@ const projects = [
 
 export default function Page() {
   return (
-    <section className="columns-1 md:columns-2 gap-6 w-[90vw] lg:w-[60vw] mt-[15%] mb-[15%] max-w-[1400px]">
+    <section className="columns-1 lg:columns-2 gap-6 w-[90vw] xl:w-[75vw] mt-[15%] mb-[15%] max-w-[1400px]">
       {projects.map((project, index) => (
         <ProjectCard key={index} {...project} />
       ))}
