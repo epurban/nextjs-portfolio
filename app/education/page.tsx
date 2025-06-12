@@ -33,7 +33,7 @@ const educations: TimelineCardProps[] = [
     description:
       "A 2-year leadership development program which thrusts individuals into four different six month long rotations, each with their own role, team, and goals. The program also includes education, personal mentorship, a host of experiences from the top minds in the field, all while working on real world projects and initiatives.  Graduated in July 2021.",
     logo: { url: "/GE.png", alt: "Georgia Tech Logo" },
-    courses: ["Digital Technology Experience 1", "Building Tomorrow's Leaders", "Digital Technology Experience 2"],
+    courses: ["Digital Technology Experience 1 (DTX1)", "Activating your Leadership Journey (ALJ)", "Digital Technology Experience 2 (DTX2)"],
     timeline: "July 2019 - July 2021",
   },
   {
@@ -83,7 +83,7 @@ const educations: TimelineCardProps[] = [
     description:
       "Top 20 in graduating class. Was a member of Chess Club, National Honors Society, and participated in Mathcounts state competitions. Go huskies!",
     logo: { url: "/huskies.png", alt: "Georgia Tech Logo" },
-    courses: ["Introduction to Web Publishing", "Advanced Web Publishing"],
+    courses: ["Introduction to Web Publishing", "Advanced Web Publishing", "Building Tomorrow's Leaders"],
     timeline: "September 2011 - June 2015",
   },
 ];
@@ -110,7 +110,7 @@ export default function Page() {
             <CirclePower className="h-5 w-5 my-2" />
           </TooltipTrigger>
           <TooltipContent side="top">
-            <p>Powered on in 1996</p>
+            <p>Powered on in December of 1996</p>
           </TooltipContent>
         </Tooltip>
       </div>
