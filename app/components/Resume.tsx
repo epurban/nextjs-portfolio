@@ -129,7 +129,7 @@ export const Resume = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8" ref={ref}>
+    <div className="flex flex-col items-center justify-center sm:flex-row sm:items-start sm:justify-start gap-8" ref={ref}>
       <motion.div variants={variants} className="absolute rounded-full pointer-events-none" animate={cursorVariant} transition={spring}>
         {cursorText}
       </motion.div>
