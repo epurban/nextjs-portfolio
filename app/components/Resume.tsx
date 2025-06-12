@@ -8,6 +8,7 @@ import "react-pdf/dist/Page/AnnotationLayer.css";
 import { useViewportMode, ViewportMode } from "@/hooks/useViewportMode";
 import { useMemo, useRef, useState, useEffect } from "react";
 import useMouse from "@react-hook/mouse-position";
+import { useHydrated } from "@/hooks/useHydrated";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
 
@@ -32,6 +33,7 @@ const LoadingSpinner = () => {
 
 export const Resume = () => {
   const viewport = useViewportMode();
+  const hydrated = useHydrated();
   const [cursorText, setCursorText] = useState("");
   const [cursorVariant, setCursorVariant] = useState("default");
   const [isPDFLoading, setIsPDFLoading] = useState(true);
@@ -102,6 +104,9 @@ export const Resume = () => {
   }, [viewport]);
 
   const resumeEnter = () => {
+    if (viewport === ViewportMode.Mobile) {
+      return;
+    }
     setCursorText("💾");
     setCursorVariant("pdf");
   };
@@ -124,16 +129,18 @@ export const Resume = () => {
   };
 
   return (
-    <div className="flex" ref={ref}>
+    <div className="flex flex-col items-center justify-center gap-8" ref={ref}>
       <motion.div variants={variants} className="absolute rounded-full pointer-events-none" animate={cursorVariant} transition={spring}>
         {cursorText}
       </motion.div>
       <motion.section
         whileHover={{ scale: 1.05 }}
         whileFocus={{ scale: 1.05 }}
-        transition={{ duration: 0.2, ease: "easeInOut" }}
-        className={`relative ${isPDFLoading ? "mt-[45vh]" : "mt-10"} rounded-md overflow-hidden flex justify-center items-center w-fit mx-auto cursor-none`}
-        onClick={downloadResume}
+        transition={spring}
+        className={`relative ${isPDFLoading ? "mt-[45vh]" : "mt-10"} rounded-md overflow-hidden flex justify-center items-center w-fit mx-auto ${
+          hydrated && viewport === ViewportMode.Mobile ? "cursor-pointer" : "cursor-none"
+        }`}
+        onClick={viewport === ViewportMode.Mobile ? undefined : downloadResume}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             downloadResume();
@@ -147,6 +154,23 @@ export const Resume = () => {
           <PDFPage onLoadSuccess={onLoadSuccess} pageNumber={1} renderAnnotationLayer={false} renderTextLayer={false} width={pdfSize} height={pdfSize} />
         </Document>
       </motion.section>
+      {hydrated && !isPDFLoading && viewport === ViewportMode.Mobile && (
+        <motion.div
+          tabIndex={0}
+          transition={spring}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 1.05 }}
+          onClick={downloadResume}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              downloadResume();
+            }
+          }}
+          className="rounded-full p-2 w-[120px] h-[50px] flex justify-center items-center bg-[#3c78d8] cursor-pointer"
+        >
+          💾 Download
+        </motion.div>
+      )}
     </div>
   );
 };

@@ -37,11 +37,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./components/ui/Tooltip
 
 export default function Page() {
   return (
-    <section className="ml-[10%] mr-[10%] flex flex-1 flex-col md:flex-row justify-center items-center gap-10 min-h-[calc(100vh-50px)]">
+    <section className="ml-[10%] mr-[10%] mt-[10%] flex flex-1 flex-col md:flex-row justify-center items-center gap-10 min-h-[calc(100vh-50px)]">
       <div className="flex flex-1 flex-col justify-center max-w-xl">
         <div className="flex flex-row items-center gap-4 mb-8">
           <Image src="/avatar.jpeg" width={60} height={60} alt="Edward Urban Avatar" style={{ borderRadius: "50%" }} />
-          <h1 className="text-6xl font-semibold tracking-tighter">I'm Edward Urban,</h1>
+          <h1 className="text-6xl font-semibold tracking-tighter">Edward Urban,</h1>
         </div>
         <p className="mb-4">{`a senior software engineer passionate about creating high quality user experiences and performant applications. Web development is my expertise, but I'm also experienced working on backend APIs, mobile applications, and online multiplayer games.`}</p>
         <div className="flex items-center gap-2">
