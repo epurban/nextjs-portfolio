@@ -47,7 +47,7 @@ export const Resume = () => {
       style={{ position: "relative", cursor: `url('download.png'), pointer` }}
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
-      className="mt-10 rounded-md overflow-hidden flex justify-center items-center"
+      className="mt-10 rounded-md overflow-hidden flex justify-center items-center w-fit mx-auto"
       onClick={() => {
         const link = document.createElement("a");
         link.href = "/ed-urban-resume.pdf";

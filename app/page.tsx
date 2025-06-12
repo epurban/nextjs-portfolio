@@ -37,7 +37,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./components/ui/Tooltip
 
 export default function Page() {
   return (
-    <section className="flex flex-1 flex-col md:flex-row justify-center items-center gap-10">
+    <section className="flex flex-1 flex-col md:flex-row justify-center items-center gap-10 min-h-[calc(100vh-50px)]">
       <div className="flex flex-1 flex-col justify-center max-w-xl">
         <div className="flex flex-row items-center gap-4 mb-8">
           <Image src="/avatar.jpeg" width={60} height={60} alt="Edward Urban Avatar" style={{ borderRadius: "50%" }} />

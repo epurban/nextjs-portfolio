@@ -54,14 +54,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Web App Manifest */}
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <body className="antialiased lg:mx-auto min-h-screen flex flex-col items-center">
+      <body className="h-screen w-screen flex flex-col items-center overflow-hidden">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <main className="flex-1 min-w-0 flex flex-col px-2 md:px-0">
-            <Navbar />
-            {children}
-            <Analytics />
-            <SpeedInsights />
-          </main>
+          <Navbar />
+          <div className="flex-1 w-full overflow-y-auto">
+            <main className="min-w-0 w-full flex flex-col px-2 md:px-0 pt-12">{children}</main>
+          </div>
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

@@ -76,10 +76,12 @@ const projects: ProjectCardProps[] = [
 
 export default function Page() {
   return (
-    <section className="columns-1 lg:columns-2 gap-6 w-[90vw] xl:w-[75vw] mt-[15%] mb-[15%] max-w-[1400px]">
-      {projects.map((project, index) => (
-        <ProjectCard key={index} {...project} />
-      ))}
+    <section className="flex flex-col items-center w-full mt-[15%] mb-[15%]">
+      <div className="columns-1 lg:columns-2 gap-6 w-[90vw] xl:w-[75vw] max-w-[1400px]">
+        {projects.map((project, index) => (
+          <ProjectCard key={index} {...project} />
+        ))}
+      </div>
     </section>
   );
 }

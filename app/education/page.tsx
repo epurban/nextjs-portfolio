@@ -103,29 +103,31 @@ const educations: TimelineCardProps[] = [
 
 export default function Page() {
   return (
-    <section className="gap-6 w-[90vw] xl:w-[75vw] mt-[10%] mb-[15%] max-w-[1400px]">
-      <div className={`flex flex-row justify-center`}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Brain className="h-5 w-5 my-2" />
-          </TooltipTrigger>
-          <TooltipContent side="top">
-            <p>{getYearsOfExperience()} years of professional experience</p>
-          </TooltipContent>
-        </Tooltip>
-      </div>
-      {educations.map((education) => (
-        <TimelineCard key={education.index} {...education} type={EducationType.School} />
-      ))}
-      <div className={`flex flex-row justify-center`}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <CirclePower className="h-5 w-5 my-2" />
-          </TooltipTrigger>
-          <TooltipContent side="top">
-            <p>Powered on in December of 1996</p>
-          </TooltipContent>
-        </Tooltip>
+    <section className="flex flex-col items-center gap-6 w-full mt-[10%] mb-[15%]">
+      <div className="w-[90vw] xl:w-[75vw] max-w-[1400px]">
+        <div className={`flex flex-row justify-center`}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Brain className="h-5 w-5 my-2" />
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              <p>{getYearsOfExperience()} years of professional experience</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
+        {educations.map((education) => (
+          <TimelineCard key={education.index} {...education} />
+        ))}
+        <div className={`flex flex-row justify-center`}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <CirclePower className="h-5 w-5 my-2" />
+            </TooltipTrigger>
+            <TooltipContent side="top">
+              <p>Powered on in December of 1996</p>
+            </TooltipContent>
+          </Tooltip>
+        </div>
       </div>
     </section>
   );
