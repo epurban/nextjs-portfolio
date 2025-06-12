@@ -2,9 +2,8 @@ import { Metadata } from "next";
 import { EducationType, TimelineCard, TimelineCardProps } from "@/components/TimelineCard";
 import { Brain, CirclePower } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/Tooltip";
-import { getYearsOfExperience } from "@/utils/experience";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
+import { getYearsOfExperience } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Education",
@@ -124,7 +123,7 @@ export default function Page() {
               <CirclePower className="h-5 w-5 my-2" />
             </TooltipTrigger>
             <TooltipContent side="top">
-              <p>Powered on in December of 1996</p>
+              <p>Powered on December 8th, 1996</p>
             </TooltipContent>
           </Tooltip>
         </div>

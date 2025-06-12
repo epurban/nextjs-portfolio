@@ -1,6 +1,6 @@
 import { GraduationCap, BriefcaseBusiness } from "lucide-react";
 import Image from "next/image";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Img } from "./types";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/Tooltip";
 
