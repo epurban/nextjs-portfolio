@@ -52,7 +52,7 @@ export const TimelineCard = ({ index, educationType, title, description, logo, c
           </TooltipContent>
         </Tooltip>
       </div>
-      <div className="h-[full] min-w-0 flex-shrink-0 flex-col items-center lg:flex">
+      <div className="min-w-0 flex-shrink-0 flex-col items-center lg:flex">
         <div className="w-[1px] flex-1 bg-[var(--border)]"></div>
         {educationType === EducationType.School ? <GraduationCap className="h-5 w-5 my-2" /> : <BriefcaseBusiness className="h-5 w-5 my-2" />}
         <div className="w-[1px] flex-1 bg-[var(--border)]"></div>
