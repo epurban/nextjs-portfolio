@@ -114,6 +114,15 @@ export const Resume = () => {
     setIsPDFLoading(false);
   };
 
+  const downloadResume = () => {
+    const link = document.createElement("a");
+    link.href = "/ed-urban-resume.pdf";
+    link.download = "ed-urban-resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="flex" ref={ref}>
       <motion.div variants={variants} className="absolute rounded-full pointer-events-none" animate={cursorVariant} transition={spring}>
@@ -121,18 +130,18 @@ export const Resume = () => {
       </motion.div>
       <motion.section
         whileHover={{ scale: 1.05 }}
+        whileFocus={{ scale: 1.05 }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
         className={`relative ${isPDFLoading ? "mt-[45vh]" : "mt-10"} rounded-md overflow-hidden flex justify-center items-center w-fit mx-auto cursor-none`}
-        onClick={() => {
-          const link = document.createElement("a");
-          link.href = "/ed-urban-resume.pdf";
-          link.download = "ed-urban-resume.pdf";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+        onClick={downloadResume}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            downloadResume();
+          }
         }}
         onMouseEnter={resumeEnter}
         onMouseLeave={resumeLeave}
+        tabIndex={0}
       >
         <Document file="/ed-urban-resume.pdf" loading={<LoadingSpinner />}>
           <PDFPage onLoadSuccess={onLoadSuccess} pageNumber={1} renderAnnotationLayer={false} renderTextLayer={false} width={pdfSize} height={pdfSize} />

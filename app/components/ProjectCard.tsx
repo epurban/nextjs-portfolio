@@ -18,7 +18,7 @@ export interface ProjectCardProps {
 
 export const ProjectCard = ({ description, title, logo, images, linkText, linkUrl }: ProjectCardProps) => {
   return (
-    <motion.div whileHover="hovered" initial="rest" animate="rest">
+    <motion.div whileHover="hovered" whileFocus="hovered" initial="rest" animate="rest" tabIndex={0}>
       <Card className="break-inside-avoid mb-6">
         <CardHeader>
           <div className="flex flex-row gap-8">

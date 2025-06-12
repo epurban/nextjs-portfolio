@@ -107,7 +107,7 @@ export default function Page() {
         <div className={`flex flex-col justify-center items-center`}>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Brain className="h-5 w-5 my-2" />
+              <Brain className="h-5 w-5 my-2" tabIndex={0} />
             </TooltipTrigger>
             <TooltipContent side="top">
               <p>{getYearsOfExperience()} years of professional experience</p>
@@ -122,7 +122,7 @@ export default function Page() {
           <div className="lg:hidden h-[20px] lg:h-auto w-[1px] lg:flex-1 bg-[var(--border)]" />
           <Tooltip>
             <TooltipTrigger asChild>
-              <CirclePower className="h-5 w-5 my-2" />
+              <CirclePower className="h-5 w-5 my-2" tabIndex={0} />
             </TooltipTrigger>
             <TooltipContent side="bottom">
               <p>Powered on December 8th, 1996</p>

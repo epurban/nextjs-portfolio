@@ -25,7 +25,7 @@ export const TimelineCard = ({ index, educationType, title, description, logo, c
       <div className="flex flex-1">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Card className="break-inside-avoid lg:mb-6 lg:mt-6 w-[100%]">
+            <Card className="break-inside-avoid lg:mb-6 lg:mt-6 w-[100%]" tabIndex={0}>
               <CardHeader>
                 <div className="flex flex-row gap-8">
                   <Image src={logo.url} width={50} height={50} alt={logo.alt} style={{ objectFit: "contain", ...logo.style }} />
