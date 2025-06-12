@@ -34,11 +34,11 @@ export const Resume = () => {
 
   const pdfSize: number = useMemo(() => {
     if (viewport === ViewportMode.Mobile) {
-      return 300;
-    } else if (viewport === ViewportMode.Tablet) {
       return 400;
-    } else {
+    } else if (viewport === ViewportMode.Tablet) {
       return 600;
+    } else {
+      return 800;
     }
   }, [viewport]);
 

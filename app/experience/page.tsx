@@ -1,4 +1,4 @@
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectCard, ProjectCardProps } from "@/components/ProjectCard";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: "A showcase of Edward Urban's professional experience and personal projects.",
 };
 
-const projects = [
+const projects: ProjectCardProps[] = [
   {
     title: "DraftKings Pick6",
     description:

@@ -1,0 +1,93 @@
+import { Metadata } from "next";
+import { EducationType, TimelineCard, TimelineCardProps } from "@/components/TimelineCard";
+import { Brain } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/Tooltip";
+import { getYearsOfExperience } from "@/utils/experience";
+
+export const metadata: Metadata = {
+  title: "Education",
+  description: "A showcase of Edward Urban's education including high school, undergraduate, and masters programs.",
+};
+
+const educations: TimelineCardProps[] = [
+  {
+    index: 0,
+    educationType: EducationType.School,
+    title: "Graduate Studies - Georgia Institute of Technology",
+    description:
+      "Pursuing a Master of Science in Computer Science with a specialization in Machine Learning. Completed graduate-level coursework in AI and security.",
+    logo: { url: "/georgiatech.png", alt: "Georgia Tech Logo" },
+    courses: [
+      "CS 6035 - Introduction to Info Security (Graduate)",
+      "CS 7637 - Knowledge-Based AI (Graduate)",
+      "CS 7646 - Machine Learning for Traders (Graduate)",
+    ],
+    timeline: "May 2020 - April 2021",
+  },
+  {
+    index: 1,
+    educationType: EducationType.Work,
+    title: "Digital Technology Leadership Program",
+    description:
+      "A 2-year leadership development program which thrusts individuals into four different six month long rotations, each with their own position, team, and goals. Graduated in July 2021.",
+    logo: { url: "/GE.png", alt: "Georgia Tech Logo" },
+    courses: ["Digital Technology Experience 1", "Building Tomorrow's Leaders", "Digital Technology Experience 2"],
+    timeline: "July 2019 - July 2021",
+  },
+  {
+    index: 2,
+    educationType: EducationType.School,
+    title: "Undergrad - University of Michigan-Dearborn",
+    description: "Bachelor of Science in Software Engineering. Graduated in April 2019",
+    logo: { url: "/michigan.svg", alt: "University of Michigan Logo" },
+    courses: [
+      "CIS 150 - Computer Science",
+      "CIS 200 - Computer Science II",
+      "CIS 275 - Discrete Structures",
+      "CIS 285 - Software Engineering Tools",
+      "CIS 297 - Introduction to C#",
+      "CIS 306 - Discrete Structures II",
+      "CIS 310 - Computer Organization and Assembly Language",
+      "CIS 350 - Data Structures and Algorithm Analysis",
+      "CIS 375 - Software Engineering I",
+      "CIS 376 - Software Engineering II",
+      "CIS 427 - Computer Networks",
+      "CIS 435 - Web Technology",
+      "CIS 450 - Operating Systems",
+      "CIS 476 - Software Architecture and Design Patterns",
+      "CIS 4961 - Senior Design Seminar I",
+      "CIS 4962 - Senior Design Seminar II",
+      "IMSE 317 - Engineering Probability and Statistics",
+    ],
+    timeline: "September 2015 - April 2019",
+  },
+  {
+    index: 3,
+    educationType: EducationType.School,
+    title: "Port Huron Northern High School",
+    description: "Top 20 in graduating class. Go huskies!",
+    logo: { url: "/huskies.png", alt: "Georgia Tech Logo" },
+    courses: ["Introduction to Web Publishing", "Advanced Web Publishing"],
+    timeline: "September 2011 - June 2015",
+  },
+];
+
+export default function Page() {
+  return (
+    <section className="gap-6 w-[90vw] xl:w-[75vw] mt-[10%] mb-[15%] max-w-[1400px]">
+      <div className={`flex flex-row justify-center`}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Brain className="h-5 w-5 my-2" />
+          </TooltipTrigger>
+          <TooltipContent side="top">
+            <p>{getYearsOfExperience()} years of professional experience</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+      {educations.map((education) => (
+        <TimelineCard key={education.index} {...education} type={EducationType.School} />
+      ))}
+    </section>
+  );
+}

@@ -241,7 +241,7 @@ function AnimatedCircle({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        cursor: "pointer",
+        // cursor: "pointer",
         zIndex: hovered ? 10 : 1,
       }}
       onMouseEnter={setHovered}

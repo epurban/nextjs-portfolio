@@ -5,14 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { motion } from "framer-motion";
+import { Img } from "./types";
 
-export interface Img {
-  url: string;
-  alt: string;
-  style?: React.CSSProperties;
-}
-
-interface ProjectCardProps {
+export interface ProjectCardProps {
   title: string;
   description: string;
   logo: Img;
