@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 import { EducationType, TimelineCard, TimelineCardProps } from "@/components/TimelineCard";
-import { Brain } from "lucide-react";
+import { Brain, CirclePower } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/Tooltip";
 import { getYearsOfExperience } from "@/utils/experience";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
   title: "Education",
@@ -29,7 +31,7 @@ const educations: TimelineCardProps[] = [
     educationType: EducationType.Work,
     title: "Digital Technology Leadership Program",
     description:
-      "A 2-year leadership development program which thrusts individuals into four different six month long rotations, each with their own position, team, and goals. Graduated in July 2021.",
+      "A 2-year leadership development program which thrusts individuals into four different six month long rotations, each with their own role, team, and goals. The program also includes education, personal mentorship, a host of experiences from the top minds in the field, all while working on real world projects and initiatives.  Graduated in July 2021.",
     logo: { url: "/GE.png", alt: "Georgia Tech Logo" },
     courses: ["Digital Technology Experience 1", "Building Tomorrow's Leaders", "Digital Technology Experience 2"],
     timeline: "July 2019 - July 2021",
@@ -38,7 +40,20 @@ const educations: TimelineCardProps[] = [
     index: 2,
     educationType: EducationType.School,
     title: "Undergrad - University of Michigan-Dearborn",
-    description: "Bachelor of Science in Software Engineering. Graduated in April 2019",
+    description: (
+      <>
+        Bachelor of Science in Software Engineering. Received the{" "}
+        <Link
+          href="https://honors.umich.edu/awards.php#branstromprize"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary underline-offset-4 hover:underline"
+        >
+          William J. Branstrom Prize
+        </Link>{" "}
+        as a freshman, and was a member of the Intelligent Systems Club. Graduated in April 2019.
+      </>
+    ),
     logo: { url: "/michigan.svg", alt: "University of Michigan Logo" },
     courses: [
       "CIS 150 - Computer Science",
@@ -65,7 +80,8 @@ const educations: TimelineCardProps[] = [
     index: 3,
     educationType: EducationType.School,
     title: "Port Huron Northern High School",
-    description: "Top 20 in graduating class. Go huskies!",
+    description:
+      "Top 20 in graduating class. Was a member of Chess Club, National Honors Society, and participated in Mathcounts state competitions. Go huskies!",
     logo: { url: "/huskies.png", alt: "Georgia Tech Logo" },
     courses: ["Introduction to Web Publishing", "Advanced Web Publishing"],
     timeline: "September 2011 - June 2015",
@@ -88,6 +104,16 @@ export default function Page() {
       {educations.map((education) => (
         <TimelineCard key={education.index} {...education} type={EducationType.School} />
       ))}
+      <div className={`flex flex-row justify-center`}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <CirclePower className="h-5 w-5 my-2" />
+          </TooltipTrigger>
+          <TooltipContent side="top">
+            <p>Powered on in 1996</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
     </section>
   );
 }

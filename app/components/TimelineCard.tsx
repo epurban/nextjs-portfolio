@@ -13,7 +13,7 @@ export interface TimelineCardProps {
   index: number;
   educationType: EducationType;
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   logo: Img;
   courses?: string[];
   timeline: string;
