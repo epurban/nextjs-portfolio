@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { EducationType, TimelineCard, TimelineCardProps } from "@/components/TimelineCard";
+import { TimelineCard, TimelineCardProps } from "@/components/TimelineCard";
 import { Brain, CirclePower } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/Tooltip";
 import Link from "next/link";
