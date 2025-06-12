@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "Edward Urban",
     description: "Senior software engineer passionate about creating high quality user experiences and performant applications.",
     url: baseUrl,
-    siteName: "Edward Urban",
+    siteName: "Edward Urban's Portfolio",
     locale: "en_US",
     type: "website",
     images: [{ url: "/avatar.jpeg" }],
