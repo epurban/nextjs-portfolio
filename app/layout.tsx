@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     siteName: "Edward Urban",
     locale: "en_US",
     type: "website",
+    images: [{ url: "/avatar.jpeg" }],
   },
   robots: {
     index: true,
