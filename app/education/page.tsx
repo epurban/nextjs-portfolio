@@ -30,8 +30,21 @@ const educations: TimelineCardProps[] = [
     index: 1,
     educationType: EducationType.Work,
     title: "Digital Technology Leadership Program",
-    description:
-      "A 2-year leadership development program which thrusts individuals into four different six month long rotations, each with their own role, team, and goals. The program also includes education, personal mentorship, a host of experiences from the top minds in the field, all while working on real world projects and initiatives.  Graduated in July 2021.",
+    description: (
+      <>
+        A 2-year leadership development program which thrusts individuals into four different six month long rotations, each with their own role, team, and
+        goals. The program also includes education, personal mentorship, and a host of experiences from the top minds in the field, all while working on real
+        world projects and initiatives. Graduated in July 2021.{" "}
+        <Link
+          href="https://careers.gevernova.com/global/en/lp-dtlp"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary underline-offset-4 hover:underline"
+        >
+          Read more about the program here.
+        </Link>{" "}
+      </>
+    ),
     logo: { url: "/GE.png", alt: "Georgia Tech Logo" },
     courses: ["Digital Technology Experience 1 (DTX1)", "Activating your Leadership Journey (ALJ)", "Digital Technology Experience 2 (DTX2)"],
     timeline: "July 2019 - July 2021",
