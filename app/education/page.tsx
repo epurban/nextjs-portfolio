@@ -45,7 +45,7 @@ const educations: TimelineCardProps[] = [
         </Link>{" "}
       </>
     ),
-    logo: { url: "/GE.png", alt: "Georgia Tech Logo" },
+    logo: { url: "/ge.png", alt: "Georgia Tech Logo" },
     courses: ["Digital Technology Experience 1 (DTX1)", "Activating your Leadership Journey (ALJ)", "Digital Technology Experience 2 (DTX2)"],
     timeline: "July 2019 - July 2021",
   },
@@ -103,7 +103,7 @@ const educations: TimelineCardProps[] = [
 
 export default function Page() {
   return (
-    <section className="flex flex-col items-center gap-6 w-full mt-[10%] mb-[15%]">
+    <section className="flex flex-col items-center gap-6 w-full mt-[10%] mb-[10%]">
       <div className="w-[90vw] xl:w-[75vw] max-w-[1400px]">
         <div className={`flex flex-row justify-center`}>
           <Tooltip>

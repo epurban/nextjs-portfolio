@@ -24,8 +24,8 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
           <div className="flex flex-row gap-8">
             <motion.div
               variants={{
-                rest: { opacity: 0.8, y: 0, scale: 1 },
-                hovered: { opacity: 1, y: 5, scale: 1.2 },
+                rest: { y: 0, scale: 1 },
+                hovered: { y: 5, scale: 1.2 },
               }}
               transition={{ duration: 0.2, ease: "easeInOut" }}
               style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}
