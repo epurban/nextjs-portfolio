@@ -46,6 +46,7 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [autoHoverIdx, setAutoHoverIdx] = useState<number | null>(null);
   const [userInteracted, setUserInteracted] = useState(false);
+  const [focusedIdx, setFocusedIdx] = useState<number | null>(null);
   const remainingSkillsRef = useRef<number[]>(shuffleArray(Array.from({ length: skills.length }, (_, i) => i)));
 
   // Auto-cycle hovered skill before user interaction
@@ -70,10 +71,14 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   // Stop auto-cycling on user interaction
   useEffect(() => {
     if (!containerRef.current) return;
-    const handlePointerMove = () => setUserInteracted(true);
+    const handleInteraction = () => setUserInteracted(true);
     const el = containerRef.current;
-    el.addEventListener("pointermove", handlePointerMove, { once: true });
-    return () => el.removeEventListener("pointermove", handlePointerMove);
+    el.addEventListener("pointermove", handleInteraction, { once: true });
+    el.addEventListener("keydown", handleInteraction, { once: true });
+    return () => {
+      el.removeEventListener("pointermove", handleInteraction);
+      el.removeEventListener("keydown", handleInteraction);
+    };
   }, []);
 
   useEffect(() => {
@@ -129,12 +134,12 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
     skillIdx++;
   }
 
-  // Determine which index is hovered (manual or auto)
-  const effectiveHoveredIdx = userInteracted ? hoveredIdx : autoHoverIdx;
+  // Determine which index is hovered (manual, auto, or focused)
+  const effectiveHoveredIdx = focusedIdx !== null ? focusedIdx : userInteracted ? hoveredIdx : autoHoverIdx;
 
-  // Simulate mouse position for auto-hovered circle
+  // Simulate mouse position for auto-hovered or focused circle
   let simulatedMouse: Vec2 | null = mouse;
-  if (!userInteracted && effectiveHoveredIdx !== null) {
+  if ((!userInteracted && effectiveHoveredIdx !== null) || focusedIdx !== null) {
     const hoveredPos = positions.find((p) => p.skillIdx === effectiveHoveredIdx);
     if (hoveredPos) {
       simulatedMouse = { x: hoveredPos.x, y: hoveredPos.y };
@@ -151,7 +156,7 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div ref={containerRef} className="relative overflow-visible" style={{ width: CONTAINER_SIZE, height: CONTAINER_SIZE }}>
+      <div ref={containerRef} className="relative overflow-visible" style={{ width: CONTAINER_SIZE, height: CONTAINER_SIZE }} role="list" aria-label="Skills">
         {positions.map(({ x, y, skillIdx }) => (
           <AnimatedCircle
             key={skillIdx}
@@ -161,7 +166,10 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
             mouse={effectiveHoveredIdx === skillIdx ? simulatedMouse : mouse}
             hovered={effectiveHoveredIdx === skillIdx}
             setHovered={() => setHoveredIdx(skillIdx)}
-            // unsetHovered={() => setHoveredIdx(null)}
+            focused={focusedIdx === skillIdx}
+            setFocused={() => setFocusedIdx(skillIdx)}
+            unsetFocused={() => setFocusedIdx(null)}
+            tabIndex={0}
           />
         ))}
         <AnimatePresence>
@@ -184,6 +192,10 @@ function AnimatedCircle({
   hovered,
   setHovered,
   unsetHovered,
+  focused,
+  setFocused,
+  unsetFocused,
+  tabIndex,
 }: {
   baseX: number;
   baseY: number;
@@ -192,6 +204,10 @@ function AnimatedCircle({
   hovered: boolean;
   setHovered: () => void;
   unsetHovered?: () => void;
+  focused: boolean;
+  setFocused: () => void;
+  unsetFocused: () => void;
+  tabIndex: number;
 }) {
   const x = useSpring(baseX, { stiffness: 300, damping: 30 });
   const y = useSpring(baseY, { stiffness: 300, damping: 30 });
@@ -229,7 +245,7 @@ function AnimatedCircle({
 
   return (
     <motion.div
-      className="absolute rounded-full bg-white shadow-sm hover:shadow-md transition-shadow"
+      className="absolute rounded-full bg-white shadow-sm hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       style={{
         x,
         y,
@@ -241,11 +257,20 @@ function AnimatedCircle({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // cursor: "pointer",
-        zIndex: hovered ? 10 : 1,
+        zIndex: hovered || focused ? 10 : 1,
       }}
-      onMouseEnter={setHovered}
+      onMouseEnter={() => {
+        if (!focused) setHovered();
+      }}
       onMouseLeave={() => unsetHovered?.()}
+      onFocus={() => {
+        setFocused();
+        unsetHovered?.();
+      }}
+      onBlur={unsetFocused}
+      tabIndex={tabIndex}
+      role="listitem"
+      aria-label={typeof icon === "string" ? icon : "Skill icon"}
     >
       {icon}
     </motion.div>

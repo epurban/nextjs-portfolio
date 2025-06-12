@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import { useViewportMode, ViewportMode } from "@/hooks/useViewportMode";
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import useMouse from "@react-hook/mouse-position";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
@@ -37,6 +37,11 @@ export const Resume = () => {
   const ref = useRef(null);
   const lastMouseXPosition = useRef(0);
   const lastMouseYPosition = useRef(0);
+
+  useEffect(() => {
+    lastMouseXPosition.current = window.innerWidth / 2;
+    lastMouseYPosition.current = window.innerHeight / 2;
+  }, []);
 
   const mouse = useMouse(ref, {
     enterDelay: 100,
