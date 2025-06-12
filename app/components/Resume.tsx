@@ -34,6 +34,7 @@ export const Resume = () => {
   const viewport = useViewportMode();
   const [cursorText, setCursorText] = useState("");
   const [cursorVariant, setCursorVariant] = useState("default");
+  const [isPDFLoading, setIsPDFLoading] = useState(true);
   const ref = useRef(null);
   const lastMouseXPosition = useRef(0);
   const lastMouseYPosition = useRef(0);
@@ -109,16 +110,19 @@ export const Resume = () => {
     setCursorVariant("default");
   };
 
+  const onLoadSuccess = () => {
+    setIsPDFLoading(false);
+  };
+
   return (
     <div className="flex" ref={ref}>
       <motion.div variants={variants} className="absolute rounded-full pointer-events-none" animate={cursorVariant} transition={spring}>
         {cursorText}
       </motion.div>
       <motion.section
-        style={{ position: "relative" }}
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.2, ease: "easeInOut" }}
-        className="mt-10 rounded-md overflow-hidden flex justify-center items-center w-fit mx-auto cursor-none"
+        className={`relative ${isPDFLoading ? "mt-[45vh]" : "mt-10"} rounded-md overflow-hidden flex justify-center items-center w-fit mx-auto cursor-none`}
         onClick={() => {
           const link = document.createElement("a");
           link.href = "/ed-urban-resume.pdf";
@@ -131,7 +135,7 @@ export const Resume = () => {
         onMouseLeave={resumeLeave}
       >
         <Document file="/ed-urban-resume.pdf" loading={<LoadingSpinner />}>
-          <PDFPage pageNumber={1} renderAnnotationLayer={false} renderTextLayer={false} width={pdfSize} height={pdfSize} />
+          <PDFPage onLoadSuccess={onLoadSuccess} pageNumber={1} renderAnnotationLayer={false} renderTextLayer={false} width={pdfSize} height={pdfSize} />
         </Document>
       </motion.section>
     </div>

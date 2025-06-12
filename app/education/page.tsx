@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const educations: TimelineCardProps[] = [
   {
     index: 0,
-    educationType: EducationType.School,
+    educationType: "School",
     title: "Graduate Studies - Georgia Institute of Technology",
     description:
       "Pursuing a Master of Science in Computer Science with a specialization in Machine Learning. Completed graduate-level coursework in AI and security.",
@@ -27,7 +27,7 @@ const educations: TimelineCardProps[] = [
   },
   {
     index: 1,
-    educationType: EducationType.Work,
+    educationType: "Work",
     title: "Digital Technology Leadership Program",
     description: (
       <>
@@ -50,7 +50,7 @@ const educations: TimelineCardProps[] = [
   },
   {
     index: 2,
-    educationType: EducationType.School,
+    educationType: "School",
     title: "Undergrad - University of Michigan-Dearborn",
     description: (
       <>
@@ -90,7 +90,7 @@ const educations: TimelineCardProps[] = [
   },
   {
     index: 3,
-    educationType: EducationType.School,
+    educationType: "School",
     title: "Port Huron Northern High School",
     description:
       "Top 20 in graduating class. Was a member of Chess Club, National Honors Society, and participated in Mathcounts state competitions. Go huskies!",
@@ -104,7 +104,7 @@ export default function Page() {
   return (
     <section className="flex flex-col items-center gap-6 w-full mt-[10%] mb-[10%]">
       <div className="w-[90vw] xl:w-[75vw] max-w-[1400px]">
-        <div className={`flex flex-row justify-center`}>
+        <div className={`flex flex-col justify-center items-center`}>
           <Tooltip>
             <TooltipTrigger asChild>
               <Brain className="h-5 w-5 my-2" />
@@ -113,16 +113,18 @@ export default function Page() {
               <p>{getYearsOfExperience()} years of professional experience</p>
             </TooltipContent>
           </Tooltip>
+          <div className="lg:hidden h-[20px] lg:h-auto w-[1px] lg:flex-1 bg-[var(--border)]" />
         </div>
         {educations.map((education) => (
           <TimelineCard key={education.index} {...education} />
         ))}
-        <div className={`flex flex-row justify-center`}>
+        <div className={`flex flex-col justify-center items-center`}>
+          <div className="lg:hidden h-[20px] lg:h-auto w-[1px] lg:flex-1 bg-[var(--border)]" />
           <Tooltip>
             <TooltipTrigger asChild>
               <CirclePower className="h-5 w-5 my-2" />
             </TooltipTrigger>
-            <TooltipContent side="top">
+            <TooltipContent side="bottom">
               <p>Powered on December 8th, 1996</p>
             </TooltipContent>
           </Tooltip>
