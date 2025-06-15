@@ -40,7 +40,7 @@ export default function Page() {
     <section className="ml-[10%] mr-[10%] mt-[60px] lg:mt-[0px] flex flex-1 flex-col md:flex-row justify-center items-center gap-10 min-h-[calc(100vh-50px)]">
       <div className="flex flex-1 flex-col justify-center max-w-xl">
         <div className="flex flex-row items-center gap-4 mb-8">
-          <div className="w-[60px] h-[60px] bg-gray-100 rounded-full overflow-hidden flex-shrink-0">
+          <div className="w-[60px] h-[60px] bg-gray-400 rounded-full overflow-hidden flex-shrink-0">
             <Image src="/avatar.jpeg" width={60} height={60} alt="Edward Urban Avatar" className="w-[60px] h-[60px] object-cover" priority quality={100} />
           </div>
           <h1 className="text-6xl font-semibold tracking-tighter">Edward Urban,</h1>
