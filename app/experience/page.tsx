@@ -25,7 +25,7 @@ const projects: ProjectCardProps[] = [
   },
   {
     title: "edwardurban.com",
-    description: "An updated personal portfolio website created using React with Next.js 15, Tailwind, and Shadcn.",
+    description: "An updated personal portfolio website created using React with Next.js 15, Tailwind for styling, and Shadcn for base components.",
     logo: { url: "/you-are-here.png", alt: "You are here icon" },
     images: [],
     linkText: "View Source",

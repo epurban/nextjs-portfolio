@@ -21,31 +21,31 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
     <motion.div whileHover="hovered" whileFocus="hovered" initial="rest" animate="rest" tabIndex={0}>
       <Card className="break-inside-avoid mb-6">
         <CardHeader>
-          <div className="flex flex-row gap-8">
-            <motion.div
-              variants={{
-                rest: { y: 0, scale: 1 },
-                hovered: { y: 5, scale: 1.2 },
-              }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-              style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}
-            >
-              <Image src={logo.url} width={50} height={50} alt={logo.alt} style={{ objectFit: "contain", ...logo.style }} priority quality={100} />
-            </motion.div>
-            <div className="flex flex-col gap-1.5">
+          <span>
+            <Image
+              className="float-left mr-3"
+              src={logo.url}
+              width={50}
+              height={50}
+              alt={logo.alt}
+              style={{ objectFit: "contain", ...logo.style }}
+              priority
+              quality={100}
+            />
+            <div className="flex flex-row items-center justify-between mb-2">
               <CardTitle>{title}</CardTitle>
-              <CardDescription>{description}</CardDescription>
+              {linkText && linkUrl && (
+                <CardAction>
+                  <Button asChild variant="link">
+                    <Link href={linkUrl} target="_blank">
+                      {linkText}
+                    </Link>
+                  </Button>
+                </CardAction>
+              )}
             </div>
-          </div>
-          {linkText && linkUrl && (
-            <CardAction>
-              <Button asChild variant="link">
-                <Link href={linkUrl} target="_blank">
-                  {linkText}
-                </Link>
-              </Button>
-            </CardAction>
-          )}
+            <CardDescription>{description}</CardDescription>
+          </span>
         </CardHeader>
         {images.length > 0 && (
           <CardContent>
