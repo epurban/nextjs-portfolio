@@ -37,13 +37,23 @@ export const Resume = () => {
   const [cursorText, setCursorText] = useState("");
   const [cursorVariant, setCursorVariant] = useState("default");
   const [isPDFLoading, setIsPDFLoading] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(800);
   const ref = useRef(null);
   const lastMouseXPosition = useRef(0);
   const lastMouseYPosition = useRef(0);
 
   useEffect(() => {
+    const updateWindowWidth = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    updateWindowWidth();
+    window.addEventListener("resize", updateWindowWidth);
+
     lastMouseXPosition.current = window.innerWidth / 2;
     lastMouseYPosition.current = window.innerHeight / 2;
+
+    return () => window.removeEventListener("resize", updateWindowWidth);
   }, []);
 
   const mouse = useMouse(ref, {
@@ -94,14 +104,16 @@ export const Resume = () => {
   };
 
   const pdfSize: number = useMemo(() => {
+    const maxSize = Math.min(800, windowWidth - 32); // 32px for padding/margins
+
     if (viewport === ViewportMode.Mobile) {
-      return 400;
+      return Math.min(400, maxSize);
     } else if (viewport === ViewportMode.Tablet) {
-      return 600;
+      return Math.min(600, maxSize);
     } else {
-      return 800;
+      return maxSize;
     }
-  }, [viewport]);
+  }, [viewport, windowWidth]);
 
   const resumeEnter = () => {
     if (viewport === ViewportMode.Mobile) {
