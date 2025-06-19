@@ -49,6 +49,24 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   const [userInteracted, setUserInteracted] = useState(false);
   const [focusedIdx, setFocusedIdx] = useState<number | null>(null);
   const remainingSkillsRef = useRef<number[]>(shuffleArray(Array.from({ length: skills.length }, (_, i) => i)));
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Debounce function to restart auto-cycling
+  const startDebounceTimer = () => {
+    // Clear any existing timer
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    const delay = isMobileDevice() ? 10000 : 3000; // 10s for mobile, 3s for desktop
+
+    debounceTimerRef.current = setTimeout(() => {
+      setUserInteracted(false);
+      setHoveredIdx(null);
+      setFocusedIdx(null);
+      debounceTimerRef.current = null;
+    }, delay);
+  };
 
   // Auto-cycle hovered skill before user interaction
   useEffect(() => {
@@ -69,15 +87,28 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
     };
   }, [skills.length, userInteracted]);
 
+  // Cleanup debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
+
   // Handle skill-specific interactions on mobile to stop auto-cycling
   const handleSkillInteraction = () => {
     setUserInteracted(true);
+    startDebounceTimer();
   };
 
   // Stop auto-cycling on user interaction (desktop only)
   useEffect(() => {
     if (!containerRef.current || isMobileDevice()) return;
-    const handleInteraction = () => setUserInteracted(true);
+    const handleInteraction = () => {
+      setUserInteracted(true);
+      startDebounceTimer();
+    };
     const el = containerRef.current;
     el.addEventListener("pointermove", handleInteraction, { once: true });
     el.addEventListener("keydown", handleInteraction, { once: true });
@@ -177,6 +208,7 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
             unsetFocused={() => setFocusedIdx(null)}
             tabIndex={0}
             onSkillInteraction={handleSkillInteraction}
+            startDebounceTimer={startDebounceTimer}
           />
         ))}
         <AnimatePresence>
@@ -204,6 +236,7 @@ function AnimatedCircle({
   unsetFocused,
   tabIndex,
   onSkillInteraction,
+  startDebounceTimer,
 }: {
   baseX: number;
   baseY: number;
@@ -217,6 +250,7 @@ function AnimatedCircle({
   unsetFocused: () => void;
   tabIndex: number;
   onSkillInteraction: () => void;
+  startDebounceTimer: () => void;
 }) {
   const x = useSpring(baseX, { stiffness: 300, damping: 30 });
   const y = useSpring(baseY, { stiffness: 300, damping: 30 });
@@ -269,12 +303,18 @@ function AnimatedCircle({
         zIndex: hovered || focused ? 10 : 1,
       }}
       onMouseEnter={() => {
-        if (!focused) setHovered();
+        if (!focused) {
+          setHovered();
+          if (!isMobileDevice()) {
+            startDebounceTimer();
+          }
+        }
       }}
       onMouseLeave={() => unsetHovered?.()}
       onFocus={() => {
         setFocused();
         unsetHovered?.();
+        startDebounceTimer();
       }}
       onBlur={unsetFocused}
       onClick={onSkillInteraction}
