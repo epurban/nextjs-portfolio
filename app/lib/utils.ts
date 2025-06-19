@@ -14,3 +14,8 @@ export const getYearsOfExperience = () => {
   const diffInYears = (now.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
   return `${Math.floor(diffInYears)}+`;
 };
+
+// Helper to detect if device is mobile/touch (not SSR safe)
+export function isMobileDevice() {
+  return typeof window !== "undefined" && ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+}

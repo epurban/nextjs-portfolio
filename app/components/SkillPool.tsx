@@ -1,5 +1,6 @@
 "use client";
 
+import { isMobileDevice } from "@/lib/utils";
 import { AnimatePresence, motion, useSpring, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -68,9 +69,14 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
     };
   }, [skills.length, userInteracted]);
 
-  // Stop auto-cycling on user interaction
+  // Handle skill-specific interactions on mobile to stop auto-cycling
+  const handleSkillInteraction = () => {
+    setUserInteracted(true);
+  };
+
+  // Stop auto-cycling on user interaction (desktop only)
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || isMobileDevice()) return;
     const handleInteraction = () => setUserInteracted(true);
     const el = containerRef.current;
     el.addEventListener("pointermove", handleInteraction, { once: true });
@@ -170,6 +176,7 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
             setFocused={() => setFocusedIdx(skillIdx)}
             unsetFocused={() => setFocusedIdx(null)}
             tabIndex={0}
+            onSkillInteraction={handleSkillInteraction}
           />
         ))}
         <AnimatePresence>
@@ -196,6 +203,7 @@ function AnimatedCircle({
   setFocused,
   unsetFocused,
   tabIndex,
+  onSkillInteraction,
 }: {
   baseX: number;
   baseY: number;
@@ -208,6 +216,7 @@ function AnimatedCircle({
   setFocused: () => void;
   unsetFocused: () => void;
   tabIndex: number;
+  onSkillInteraction: () => void;
 }) {
   const x = useSpring(baseX, { stiffness: 300, damping: 30 });
   const y = useSpring(baseY, { stiffness: 300, damping: 30 });
@@ -268,6 +277,8 @@ function AnimatedCircle({
         unsetHovered?.();
       }}
       onBlur={unsetFocused}
+      onClick={onSkillInteraction}
+      onTouchStart={onSkillInteraction}
       tabIndex={tabIndex}
       role="listitem"
       aria-label={typeof icon === "string" ? icon : "Skill icon"}
