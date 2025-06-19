@@ -50,6 +50,17 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   const [focusedIdx, setFocusedIdx] = useState<number | null>(null);
   const remainingSkillsRef = useRef<number[]>(shuffleArray(Array.from({ length: skills.length }, (_, i) => i)));
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const lastInputWasKeyboard = useRef<boolean>(false);
+
+  const runAutoHoverLogic = () => {
+    // If we've shown all skills, reset the queue with a new random order
+    if (remainingSkillsRef.current.length === 0) {
+      remainingSkillsRef.current = shuffleArray(Array.from({ length: skills.length }, (_, i) => i));
+    }
+    const nextIdx = remainingSkillsRef.current[0];
+    setAutoHoverIdx(nextIdx);
+    remainingSkillsRef.current = remainingSkillsRef.current.slice(1);
+  };
 
   // Debounce function to restart auto-cycling
   const startDebounceTimer = () => {
@@ -58,12 +69,16 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
       clearTimeout(debounceTimerRef.current);
     }
 
-    const delay = isMobileDevice() ? 10000 : 3000; // 10s for mobile, 3s for desktop
+    const delay = isMobileDevice() ? 10000 : 5000; // 10s for mobile, 5s for desktop
 
     debounceTimerRef.current = setTimeout(() => {
       setUserInteracted(false);
       setHoveredIdx(null);
       setFocusedIdx(null);
+
+      // Immediately select a new skill instead of setting to null
+      runAutoHoverLogic();
+
       debounceTimerRef.current = null;
     }, delay);
   };
@@ -71,17 +86,12 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   // Auto-cycle hovered skill before user interaction
   useEffect(() => {
     if (userInteracted) return;
+
     let interval: NodeJS.Timeout;
     interval = setInterval(() => {
-      // If we've shown all skills, reset the queue with a new random order
-      if (remainingSkillsRef.current.length === 0) {
-        remainingSkillsRef.current = shuffleArray(Array.from({ length: skills.length }, (_, i) => i));
-      }
+      runAutoHoverLogic();
+    }, 2500); // 2.5 seconds between each
 
-      const nextIdx = remainingSkillsRef.current[0];
-      setAutoHoverIdx(nextIdx);
-      remainingSkillsRef.current = remainingSkillsRef.current.slice(1);
-    }, 3000); // 3 seconds between each
     return () => {
       if (interval) clearInterval(interval);
     };
@@ -105,13 +115,23 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
   // Stop auto-cycling on user interaction (desktop only)
   useEffect(() => {
     if (!containerRef.current || isMobileDevice()) return;
+
     const handleInteraction = () => {
       setUserInteracted(true);
       startDebounceTimer();
     };
+
     const el = containerRef.current;
-    el.addEventListener("pointermove", handleInteraction, { once: true });
-    el.addEventListener("keydown", handleInteraction, { once: true });
+
+    el.addEventListener("pointermove", handleInteraction);
+    el.addEventListener("keydown", () => {
+      lastInputWasKeyboard.current = true;
+      handleInteraction();
+    });
+    el.addEventListener("mousedown", () => {
+      lastInputWasKeyboard.current = false;
+    });
+
     return () => {
       el.removeEventListener("pointermove", handleInteraction);
       el.removeEventListener("keydown", handleInteraction);
@@ -209,6 +229,7 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
             tabIndex={0}
             onSkillInteraction={handleSkillInteraction}
             startDebounceTimer={startDebounceTimer}
+            lastInputWasKeyboard={lastInputWasKeyboard.current}
           />
         ))}
         <AnimatePresence>
@@ -237,6 +258,7 @@ function AnimatedCircle({
   tabIndex,
   onSkillInteraction,
   startDebounceTimer,
+  lastInputWasKeyboard,
 }: {
   baseX: number;
   baseY: number;
@@ -251,6 +273,7 @@ function AnimatedCircle({
   tabIndex: number;
   onSkillInteraction: () => void;
   startDebounceTimer: () => void;
+  lastInputWasKeyboard: boolean;
 }) {
   const x = useSpring(baseX, { stiffness: 300, damping: 30 });
   const y = useSpring(baseY, { stiffness: 300, damping: 30 });
@@ -288,7 +311,13 @@ function AnimatedCircle({
 
   return (
     <motion.div
-      className="absolute rounded-full bg-white shadow-sm hover:shadow-md transition-shadow focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      className={`absolute rounded-full bg-white shadow-sm hover:shadow-md transition-shadow ${
+        focused
+          ? "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          : hovered && !isMobileDevice()
+          ? "ring-2 ring-blue-500 ring-offset-2"
+          : "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+      }`}
       style={{
         x,
         y,
@@ -312,13 +341,15 @@ function AnimatedCircle({
       }}
       onMouseLeave={() => unsetHovered?.()}
       onFocus={() => {
+        console.log("focus", lastInputWasKeyboard);
+        if (!lastInputWasKeyboard) return;
         setFocused();
         unsetHovered?.();
         startDebounceTimer();
       }}
       onBlur={unsetFocused}
-      onClick={onSkillInteraction}
-      onTouchStart={onSkillInteraction}
+      onClick={isMobileDevice() ? onSkillInteraction : undefined}
+      onTouchStart={isMobileDevice() ? onSkillInteraction : undefined}
       tabIndex={tabIndex}
       role="listitem"
       aria-label={typeof icon === "string" ? icon : "Skill icon"}
