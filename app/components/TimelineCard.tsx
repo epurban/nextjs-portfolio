@@ -28,7 +28,9 @@ export const TimelineCard = ({ index, educationType, title, description, logo, c
             <Card className="break-inside-avoid lg:mb-6 lg:mt-6 w-[100%]" tabIndex={0}>
               <CardHeader>
                 <div className="flex flex-row gap-8">
-                  <Image src={logo.url} width={50} height={50} alt={logo.alt} style={{ objectFit: "contain", ...logo.style }} />
+                  <div className="min-w-[50px] flex items-center justify-center">
+                    <Image src={logo.url} width={50} height={50} alt={logo.alt} style={{ objectFit: "contain", ...logo.style }} priority quality={100} />
+                  </div>
                   <div className="flex flex-col gap-1.5">
                     <CardTitle>{title}</CardTitle>
                     <CardDescription>{description}</CardDescription>

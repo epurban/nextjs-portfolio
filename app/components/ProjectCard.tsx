@@ -30,7 +30,7 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
               transition={{ duration: 0.2, ease: "easeInOut" }}
               style={{ flex: 1, minWidth: "50px", width: "50px", height: "50px" }}
             >
-              <Image src={logo.url} width={50} height={50} alt={logo.alt} style={{ objectFit: "contain", ...logo.style }} />
+              <Image src={logo.url} width={50} height={50} alt={logo.alt} style={{ objectFit: "contain", ...logo.style }} priority quality={100} />
             </motion.div>
             <div className="flex flex-col gap-1.5">
               <CardTitle>{title}</CardTitle>
@@ -49,7 +49,7 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
         </CardHeader>
         {images.length > 0 && (
           <CardContent>
-            <Image src={images[0].url} layout="responsive" alt={images[0].alt} width={200} height={200} style={{ borderRadius: "8px" }} />
+            <Image className="rounded-lg" src={images[0].url} layout="responsive" alt={images[0].alt} width={200} height={200} priority quality={100} />
           </CardContent>
         )}
       </Card>
