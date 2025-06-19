@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import Image from "next/image";
-import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { motion } from "framer-motion";
 import { Img } from "./types";
 
@@ -32,16 +32,14 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
               priority
               quality={100}
             />
-            <div className="flex flex-row items-center justify-between mb-2">
+            <div className={`flex flex-row items-center justify-between mb-2`}>
               <CardTitle>{title}</CardTitle>
               {linkText && linkUrl && (
-                <CardAction>
-                  <Button asChild variant="link">
-                    <Link href={linkUrl} target="_blank">
-                      {linkText}
-                    </Link>
-                  </Button>
-                </CardAction>
+                <Button asChild variant="link">
+                  <Link href={linkUrl} target="_blank" className="h-[16px]">
+                    {linkText}
+                  </Link>
+                </Button>
               )}
             </div>
             <CardDescription>{description}</CardDescription>
