@@ -234,7 +234,14 @@ export const SkillPool = ({ skills }: SkillPoolProps) => {
         ))}
         <AnimatePresence>
           <div className="absolute top-5 left-1/2 -translate-x-1/2">
-            <motion.p variants={variants} initial="initial" animate="animate" exit="exit" key={skillText} className="text-2xl font-semibold tracking-tighter">
+            <motion.p
+              variants={variants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              key={skillText}
+              className="text-2xl font-semibold tracking-tighter whitespace-nowrap"
+            >
               {skillText}
             </motion.p>
           </div>
