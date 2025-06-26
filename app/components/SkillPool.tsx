@@ -318,7 +318,7 @@ function AnimatedCircle({
 
   return (
     <motion.div
-      className={`absolute rounded-full bg-white shadow-sm hover:shadow-md transition-shadow ${
+      className={`absolute rounded-full bg-[#F5F5F7] dark:bg-white shadow-sm hover:shadow-md transition-shadow border-1 ${
         focused
           ? "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           : hovered && !isMobileDevice()
