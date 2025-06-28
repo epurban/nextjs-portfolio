@@ -16,9 +16,10 @@ export interface ProjectCardProps {
   images: Img[];
   linkText?: string;
   linkUrl?: string;
+  cutoffAtTop?: boolean;
 }
 
-export const ProjectCard = ({ description, title, logo, images, linkText, linkUrl }: ProjectCardProps) => {
+export const ProjectCard = ({ description, title, logo, images, linkText, linkUrl, cutoffAtTop = false }: ProjectCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -72,7 +73,9 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
                   onLayoutAnimationComplete={() => setIsAnimating(false)}
                 >
                   <Image
-                    className={`rounded-lg object-cover w-full h-full transition-opacity duration-200 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+                    className={`rounded-lg object-cover w-full h-full transition-opacity duration-200 ${imageLoaded ? "opacity-100" : "opacity-0"} ${
+                      cutoffAtTop ? "object-bottom" : "object-top"
+                    }`}
                     src={images[0].url}
                     alt={images[0].alt}
                     priority
@@ -111,7 +114,14 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
                 aspectRatio: "16/9",
               }}
             >
-              <Image className="object-cover w-full h-full" src={images[0].url} alt={images[0].alt} priority quality={100} fill />
+              <Image
+                className={`object-cover w-full h-full ${cutoffAtTop ? "object-bottom" : "object-top"}`}
+                src={images[0].url}
+                alt={images[0].alt}
+                priority
+                quality={100}
+                fill
+              />
               <button
                 onClick={closeFullscreen}
                 className="absolute top-4 right-4 text-white bg-black/50 rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/75 transition-colors z-10 cursor-pointer"
