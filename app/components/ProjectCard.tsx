@@ -23,12 +23,9 @@ export interface ProjectCardProps {
 
 const slideAnimations = {
   getInitial: (hasNavigated: boolean, direction: "left" | "right") => (hasNavigated ? { x: direction === "right" ? 300 : -300, opacity: 0 } : { opacity: 0 }),
-
   animate: { x: 0, opacity: 1 },
-
   getExit: (hasNavigated: boolean, direction: "left" | "right") => (hasNavigated ? { x: direction === "right" ? -300 : 300, opacity: 0 } : { opacity: 0 }),
-
-  transition: { type: "spring", stiffness: 300, damping: 30 },
+  transition: { duration: 0.35, type: "spring", bounce: 0.15 },
 };
 
 export const ProjectCard = ({ description, title, logo, images, linkText, linkUrl, cutoffAtTop = false }: ProjectCardProps) => {
@@ -97,7 +94,7 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
                   dragElastic={0.2}
                   onDragEnd={cardCarousel.handleDragEnd}
                 >
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence>
                     <motion.div
                       key={cardCarousel.currentIndex}
                       initial={slideAnimations.getInitial(cardCarousel.hasNavigated, cardCarousel.slideDirection)}
@@ -164,7 +161,7 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
               dragElastic={0.2}
               onDragEnd={fullscreenCarousel.handleDragEnd}
             >
-              <AnimatePresence mode="wait">
+              <AnimatePresence>
                 <motion.div
                   key={fullscreenCarousel.currentIndex}
                   initial={slideAnimations.getInitial(fullscreenCarousel.hasNavigated, fullscreenCarousel.slideDirection)}
@@ -174,7 +171,9 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
                   className="w-full h-full absolute inset-0"
                 >
                   <Image
-                    className={`object-cover w-full h-full ${cutoffAtTop ? "object-bottom" : "object-top"}`}
+                    className={`object-cover w-full h-full transition-opacity duration-200 ${imageLoaded ? "opacity-100" : "opacity-0"} ${
+                      cutoffAtTop ? "object-bottom" : "object-top"
+                    }`}
                     src={images[fullscreenCarousel.currentIndex].url}
                     alt={images[fullscreenCarousel.currentIndex].alt}
                     priority
