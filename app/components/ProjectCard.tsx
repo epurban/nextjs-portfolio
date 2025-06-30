@@ -86,6 +86,15 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
                 <motion.div
                   className="cursor-pointer w-full h-full relative"
                   onClick={toggleFullscreen}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      toggleFullscreen();
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Open ${title} image ${cardCarousel.currentIndex + 1} of ${images.length} in fullscreen`}
                   style={{ zIndex: 1 }}
                   onLayoutAnimationStart={() => setIsAnimating(true)}
                   onLayoutAnimationComplete={() => setIsAnimating(false)}
