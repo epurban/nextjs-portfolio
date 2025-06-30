@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Img } from "./types";
 import { useState } from "react";
 import { X } from "lucide-react";
+import { CarouselControls } from "./CarouselControls";
+import { useCarousel } from "@/hooks/useCarousel";
 
 export interface ProjectCardProps {
   title: string;
@@ -19,12 +21,27 @@ export interface ProjectCardProps {
   cutoffAtTop?: boolean;
 }
 
+const slideAnimations = {
+  getInitial: (hasNavigated: boolean, direction: "left" | "right") => (hasNavigated ? { x: direction === "right" ? 300 : -300, opacity: 0 } : { opacity: 0 }),
+
+  animate: { x: 0, opacity: 1 },
+
+  getExit: (hasNavigated: boolean, direction: "left" | "right") => (hasNavigated ? { x: direction === "right" ? -300 : 300, opacity: 0 } : { opacity: 0 }),
+
+  transition: { type: "spring", stiffness: 300, damping: 30 },
+};
+
 export const ProjectCard = ({ description, title, logo, images, linkText, linkUrl, cutoffAtTop = false }: ProjectCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  const cardCarousel = useCarousel(images.length);
+  const fullscreenCarousel = useCarousel(images.length);
+
   const toggleFullscreen = () => {
+    fullscreenCarousel.goToIndex(cardCarousel.currentIndex);
+    fullscreenCarousel.reset();
     setIsFullscreen(!isFullscreen);
   };
 
@@ -63,31 +80,58 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
           </CardHeader>
           {images.length > 0 && (
             <CardContent className="relative" style={{ width: "100%", height: "auto" }}>
-              <div style={{ aspectRatio: "16/9" }} className={`w-[100%] h-auto bg-gray-900 rounded-lg relative`}>
+              <div
+                style={{ aspectRatio: "16/9" }}
+                className={`w-[100%] h-auto bg-gray-900 rounded-lg relative overflow-hidden`}
+                onMouseEnter={() => cardCarousel.setShowControls(true)}
+                onMouseLeave={() => cardCarousel.setShowControls(false)}
+              >
                 <motion.div
-                  layoutId={`image-${title}-${images[0].url}`}
                   className="cursor-pointer w-full h-full relative"
                   onClick={toggleFullscreen}
-                  style={{ zIndex: isFullscreen || (!isFullscreen && isAnimating) ? 60 : 1 }}
+                  style={{ zIndex: 1 }}
                   onLayoutAnimationStart={() => setIsAnimating(true)}
                   onLayoutAnimationComplete={() => setIsAnimating(false)}
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.2}
+                  onDragEnd={cardCarousel.handleDragEnd}
                 >
-                  <Image
-                    className={`rounded-lg object-cover w-full h-full transition-opacity duration-200 ${imageLoaded ? "opacity-100" : "opacity-0"} ${
-                      cutoffAtTop ? "object-bottom" : "object-top"
-                    }`}
-                    src={images[0].url}
-                    alt={images[0].alt}
-                    priority
-                    quality={100}
-                    fill
-                    placeholder="empty"
-                    onLoad={() => {
-                      setImageLoaded(true);
-                    }}
-                    style={{ cursor: "pointer" }}
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={cardCarousel.currentIndex}
+                      initial={slideAnimations.getInitial(cardCarousel.hasNavigated, cardCarousel.slideDirection)}
+                      animate={slideAnimations.animate}
+                      exit={slideAnimations.getExit(cardCarousel.hasNavigated, cardCarousel.slideDirection)}
+                      transition={slideAnimations.transition}
+                      className="w-full h-full absolute inset-0"
+                    >
+                      <Image
+                        className={`rounded-lg object-cover w-full h-full transition-opacity duration-200 ${imageLoaded ? "opacity-100" : "opacity-0"} ${
+                          cutoffAtTop ? "object-bottom" : "object-top"
+                        }`}
+                        src={images[cardCarousel.currentIndex].url}
+                        alt={images[cardCarousel.currentIndex].alt}
+                        priority
+                        quality={100}
+                        fill
+                        placeholder="empty"
+                        onLoad={() => setImageLoaded(true)}
+                        style={{ cursor: "pointer" }}
+                        draggable={false}
+                      />
+                    </motion.div>
+                  </AnimatePresence>
                 </motion.div>
+
+                <CarouselControls
+                  totalImages={images.length}
+                  currentIndex={cardCarousel.currentIndex}
+                  showControls={cardCarousel.showControls}
+                  onNavigate={cardCarousel.navigate}
+                  onGoToIndex={cardCarousel.goToIndex}
+                  size="small"
+                />
               </div>
             </CardContent>
           )}
@@ -103,25 +147,53 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
             onClick={closeFullscreen}
+            onMouseEnter={() => fullscreenCarousel.setShowControls(true)}
+            onMouseLeave={() => fullscreenCarousel.setShowControls(false)}
           >
             <motion.div
-              layoutId={`image-${title}-${images[0].url}`}
               className="relative rounded-lg overflow-hidden"
               onClick={(e) => e.stopPropagation()}
               style={{
                 width: "min(95vw, 95vh * 16/9)",
                 height: "min(95vh, 95vw * 9/16)",
                 aspectRatio: "16/9",
+                zIndex: 60,
               }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={fullscreenCarousel.handleDragEnd}
             >
-              <Image
-                className={`object-cover w-full h-full ${cutoffAtTop ? "object-bottom" : "object-top"}`}
-                src={images[0].url}
-                alt={images[0].alt}
-                priority
-                quality={100}
-                fill
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={fullscreenCarousel.currentIndex}
+                  initial={slideAnimations.getInitial(fullscreenCarousel.hasNavigated, fullscreenCarousel.slideDirection)}
+                  animate={slideAnimations.animate}
+                  exit={slideAnimations.getExit(fullscreenCarousel.hasNavigated, fullscreenCarousel.slideDirection)}
+                  transition={slideAnimations.transition}
+                  className="w-full h-full absolute inset-0"
+                >
+                  <Image
+                    className={`object-cover w-full h-full ${cutoffAtTop ? "object-bottom" : "object-top"}`}
+                    src={images[fullscreenCarousel.currentIndex].url}
+                    alt={images[fullscreenCarousel.currentIndex].alt}
+                    priority
+                    quality={100}
+                    fill
+                    draggable={false}
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              <CarouselControls
+                totalImages={images.length}
+                currentIndex={fullscreenCarousel.currentIndex}
+                showControls={fullscreenCarousel.showControls}
+                onNavigate={fullscreenCarousel.navigate}
+                onGoToIndex={fullscreenCarousel.goToIndex}
+                size="large"
               />
+
               <button
                 onClick={closeFullscreen}
                 className="absolute top-4 right-4 text-white bg-black/50 rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/75 transition-colors z-10 cursor-pointer"

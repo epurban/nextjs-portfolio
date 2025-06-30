@@ -68,7 +68,11 @@ const projects: ProjectCardProps[] = [
     description:
       "Before I went to University of Michigan for Computer Science, I self taught myself how to code in VB6, learned client-server game networking architecture, partnered with an artist, and used an existing open source game engine to create Nin Online, a 2D online multiplayer role playing game for Windows.",
     logo: { url: "/nin-online-logo.png", alt: "Nin Online Logo" },
-    images: [{ url: "/nin-online.png", alt: "Nin Online Screenshot" }],
+    images: [
+      { url: "/nin-online.png", alt: "Nin Online Screenshot" },
+      { url: "/nin-online-2.png", alt: "Nin Online Screenshot 2" },
+      { url: "/nin-online-3.png", alt: "Nin Online Screenshot 3" },
+    ],
     cutoffAtTop: true,
     linkText: "Visit Site",
     linkUrl: "https://ninonline.com",

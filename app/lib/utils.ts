@@ -12,7 +12,7 @@ export function cn(...inputs: ClassValue[]) {
 export const getYearsOfExperience = () => {
   const now = new Date();
   const diffInYears = (now.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
-  return `${Math.floor(diffInYears)}+`;
+  return Math.floor(diffInYears);
 };
 
 // Helper to detect if device is mobile/touch (not SSR safe)
