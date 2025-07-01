@@ -201,13 +201,21 @@ export const ProjectCard = ({ description, title, logo, images, linkText, linkUr
                 onGoToIndex={fullscreenCarousel.goToIndex}
                 size="large"
               />
+
               <button
                 onClick={closeFullscreen}
-                className="absolute top-4 right-4 max-sm:fixed max-sm:z-[80] text-white bg-black/50 rounded-full w-10 h-10 sm:w-8 sm:h-8 flex items-center justify-center hover:bg-black/75 transition-colors cursor-pointer"
+                className="hidden sm:flex absolute top-4 right-4 text-white bg-black/50 rounded-full w-8 h-8 items-center justify-center hover:bg-black/75 transition-colors cursor-pointer"
               >
-                <X className="w-5 h-5 sm:w-4 sm:h-4" />
+                <X className="w-4 h-4" />
               </button>
             </motion.div>
+
+            <button
+              onClick={closeFullscreen}
+              className="sm:hidden fixed top-4 right-4 z-[80] text-white bg-black/50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/75 transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
