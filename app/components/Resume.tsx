@@ -38,7 +38,7 @@ export const Resume = () => {
   const [cursorVariant, setCursorVariant] = useState("default");
   const [isPDFLoading, setIsPDFLoading] = useState(true);
   const [windowWidth, setWindowWidth] = useState(800);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const lastMouseXPosition = useRef(0);
   const lastMouseYPosition = useRef(0);
 
@@ -56,7 +56,7 @@ export const Resume = () => {
     return () => window.removeEventListener("resize", updateWindowWidth);
   }, []);
 
-  const mouse = useMouse(ref, {
+  const mouse = useMouse(ref as React.RefObject<HTMLDivElement>, {
     enterDelay: 100,
     leaveDelay: 100,
     fps: 60,
