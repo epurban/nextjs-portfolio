@@ -12,7 +12,10 @@ const projects: ProjectCardProps[] = [
     description:
       "My current endeavor at DraftKings, Pick6 is a cutting edge peer to peer fantasy game available for major sports and some esports. Notable features I've tech planned and delivered include a Tokenized Rewards System, Player Pools Statuses, and a Jackpot Promotion Experience. Frameworks, libraries and tools I use on a daily basis include React 18, Remix v2, Emotion, Express, Vitest, Playwright, Storybook.",
     logo: { url: "/pick-six-logo.png", alt: "Pick6 Logo" },
-    images: [{ url: "/pick-six-1.jpg", alt: "Pick6 Screenshot" }],
+    images: [
+      { url: "/pick-six-1.jpg", alt: "Pick6 Home Screenshot" },
+      { url: "/pick-six-2.jpg", alt: "Pick6 My Picks Screenshot" },
+    ],
     linkText: "Visit Site",
     linkUrl: "https://pick6.draftkings.com",
   },
@@ -43,7 +46,12 @@ const projects: ProjectCardProps[] = [
     description:
       "An NFT marketplace which allowed users to purchase digital memorabilia and player cards to be used in our gamified NFT experience, known as Reignmakers. Notable features that I tech planned and delivered include the Bulk Listings Manager, Inline Card Actions, a Revamped Virtualized Grid, Time Extension Auctions, a Revamped Pack Reveal Experience, and Dark Mode.",
     logo: { url: "/draftkings.webp", alt: "DraftKings logo" },
-    images: [{ url: "/marketplace-2.jpg", alt: "Marketplace Screenshot" }],
+    images: [
+      { url: "/marketplace-1.jpg", alt: "Marketplace Screenshot 1" },
+      { url: "/marketplace-2.jpg", alt: "Marketplace Screenshot 2" },
+      { url: "/marketplace-3.jpg", alt: "Marketplace Screenshot 3" },
+      { url: "/marketplace-4.jpg", alt: "Marketplace Screenshot 4" },
+    ],
     linkText: "Watch Video",
     linkUrl: "https://youtu.be/ElzyGrCVjwc?list=PLCJVf8kosMyJwU24CDArrdwTDPxbgIyyh&t=66",
   },
@@ -68,7 +76,12 @@ const projects: ProjectCardProps[] = [
     description:
       "Before I went to University of Michigan for Computer Science, I self taught myself how to code in VB6, learned client-server game networking architecture, partnered with an artist, and used an existing open source game engine to create Nin Online, a 2D online multiplayer role playing game for Windows.",
     logo: { url: "/nin-online-logo.png", alt: "Nin Online Logo" },
-    images: [{ url: "/nin-online.png", alt: "Nin Online Screenshot" }],
+    images: [
+      { url: "/nin-online.png", alt: "Nin Online Screenshot" },
+      { url: "/nin-online-2.png", alt: "Nin Online Screenshot 2" },
+      { url: "/nin-online-3.png", alt: "Nin Online Screenshot 3" },
+    ],
+    cutoffAtTop: true,
     linkText: "Visit Site",
     linkUrl: "https://ninonline.com",
   },

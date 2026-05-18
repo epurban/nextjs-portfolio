@@ -110,7 +110,7 @@ export default function Page() {
               <Brain className="h-5 w-5 my-2" tabIndex={0} />
             </TooltipTrigger>
             <TooltipContent side="top">
-              <p>{getYearsOfExperience()} years of professional experience</p>
+              <p>Today, I have over {getYearsOfExperience()} years of professional experience</p>
             </TooltipContent>
           </Tooltip>
           <div className="lg:hidden h-[20px] lg:h-auto w-[1px] lg:flex-1 bg-[var(--border)]" />
