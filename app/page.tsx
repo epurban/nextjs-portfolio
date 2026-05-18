@@ -1,5 +1,6 @@
-import { Button } from "@/components/ui/Button";
-import { Github, Linkedin, Mail, ChartPie, Phone, Cable, Gamepad2 } from "lucide-react";
+import { buttonVariants } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
+import { Github, Linkedin, Mail } from "lucide-react";
 import {
   RemixDark,
   React,
@@ -33,7 +34,6 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { SkillPool } from "./components/SkillPool";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./components/ui/Tooltip";
 
 export default function Page() {
   return (
@@ -47,42 +47,32 @@ export default function Page() {
         </div>
         <p className="mb-4">{`a senior software engineer passionate about creating high quality user experiences and performant applications. Web development is my expertise, but I'm also experienced working on backend APIs, mobile applications, and online multiplayer games.`}</p>
         <div className="flex items-center gap-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
-                <Link href="https://github.com/epurban" target="_blank">
-                  <Github className="h-5 w-5" />
-                </Link>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="bottom">
-              <p>Check out my public projects</p>
-            </TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
-                <Link href="https://www.linkedin.com/in/epurban" target="_blank">
-                  <Linkedin className="h-5 w-5" />
-                </Link>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="bottom">
-              <p>Connect with me on LinkedIn</p>
-            </TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button asChild variant="outline" className="flex items-center gap-2 w-10 h-10 cursor-pointer">
-                <Link href="mailto:edurbancodes@gmail.com">
-                  <Mail className="h-5 w-5" />
-                </Link>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="bottom">
-              <p>Shoot me an email</p>
-            </TooltipContent>
-          </Tooltip>
+          <Link
+            href="https://github.com/epurban"
+            target="_blank"
+            aria-label="Check out my public projects"
+            title="Check out my public projects"
+            className={cn(buttonVariants({ variant: "outline" }), "flex items-center gap-2 w-10 h-10 cursor-pointer")}
+          >
+            <Github className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.linkedin.com/in/epurban"
+            target="_blank"
+            aria-label="Connect with me on LinkedIn"
+            title="Connect with me on LinkedIn"
+            className={cn(buttonVariants({ variant: "outline" }), "flex items-center gap-2 w-10 h-10 cursor-pointer")}
+          >
+            <Linkedin className="h-5 w-5" />
+          </Link>
+          <Link
+            href="mailto:edurbancodes@gmail.com"
+            aria-label="Shoot me an email"
+            title="Shoot me an email"
+            className={cn(buttonVariants({ variant: "outline" }), "flex items-center gap-2 w-10 h-10 cursor-pointer")}
+          >
+            <Mail className="h-5 w-5" />
+          </Link>
         </div>
       </div>
       <SkillPool
